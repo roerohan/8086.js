@@ -27,7 +27,7 @@ export default function Home() {
         <div className={classes.root}>
             <Grid container spacing={3}>
                 <Grid item xs={6}>
-                    <Paper className={classes.paper}>xs=6</Paper>
+                    <Paper className={classes.paper}>Content for the left half.</Paper>
                 </Grid>
                 <Grid item xs={6}>
                     <AceEditor
