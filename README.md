@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <!-- <a href="https://github.com/roerohan/Template">
+  <!-- <a href="https://github.com/roerohan/8086.js">
     <img src="https://project-logo.png" alt="Logo" width="80">
   </a> -->
 
@@ -12,14 +12,14 @@
   <p align="center">
     A web-based 8086 emulator built with Javascript.
     <br />
-    <a href="https://github.com/roerohan/Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/roerohan/8086.js"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/roerohan/Template">View Demo</a>
+    <a href="https://github.com/roerohan/8086.js">View Demo</a>
     ·
-    <a href="https://github.com/roerohan/Template/issues">Report Bug</a>
+    <a href="https://github.com/roerohan/8086.js/issues">Report Bug</a>
     ·
-    <a href="https://github.com/roerohan/Template/issues">Request Feature</a>
+    <a href="https://github.com/roerohan/8086.js/issues">Request Feature</a>
   </p>
 </p>
 
@@ -44,18 +44,15 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`roerohan`, `repo`
-
+8086.js is a web based Intel 8086 emulator.
 
 ### Built With
 
-* []()
-* []()
-* []()
+* [React.js](https://reactjs.org/docs/getting-started.html)
+* [Redux](https://redux.js.org/tutorials/essentials/part-1-overview-concepts)
+* [Material UI](https://material-ui.com/getting-started/usage/)
 
 
 
@@ -66,29 +63,39 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+You will need the following to be able to run the project.
+
 * npm
-```sh
-npm install npm@latest -g
-```
+* node (Node.js)
+
+
 
 ### Installation
  
 1. Clone the Repo
+
 ```sh
-git clone https://github.com/roerohan/Template.git
+git clone https://github.com/roerohan/8086.js.git
 ```
+
 2. Install NPM packages
+
 ```sh
 npm install
 ```
 
 
-
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+To run the React App locally, you can run the following command.
+
+1. Run the React App
+
+```sh
+npm start
+```
+
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
@@ -97,7 +104,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/roerohan/Template/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/roerohan/8086.js/issues) for a list of proposed features (and known issues).
 
 
 
@@ -125,5 +132,5 @@ Distributed under the MIT License. See [`LICENSE`](./LICENSE) for more informati
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [roerohan-url]: https://roerohan.github.io
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
-[issues-url]: https://github.com/roerohan/Template/issues
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-8086.js.svg?style=flat-square
+[issues-url]: https://github.com/roerohan/8086.js/issues
