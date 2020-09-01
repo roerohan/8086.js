@@ -133,4 +133,4 @@ Distributed under the MIT License. See [`LICENSE`](./LICENSE) for more informati
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [roerohan-url]: https://roerohan.github.io
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-8086.js.svg?style=flat-square
-[issues-url]: https://github.com/roerohan/8086.js/issues/
+[issues-url]: https://github.com/roerohan/8086.js/issues
