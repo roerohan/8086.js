@@ -7,10 +7,10 @@
     <img src="https://project-logo.png" alt="Logo" width="80">
   </a> -->
 
-  <h3 align="center">YOUR_TITLE</h3>
+  <h3 align="center">8086.js</h3>
 
   <p align="center">
-    YOUR_SHORT_DESCRIPTION
+    A web-based 8086 emulator built with Javascript.
     <br />
     <a href="https://github.com/roerohan/Template"><strong>Explore the docs »</strong></a>
     <br />
