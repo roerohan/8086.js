@@ -50,3 +50,13 @@ export default class Register {
         this.value = (this.h << 8) + this.l;
     }
 }
+
+/**
+ * Sample usage:
+ *
+ * const ax = new Register();
+ * let al = ax.get('l');
+ * al += 10;
+ * ax.set(al, 'l');
+ * console.log('The value in ax is: ' + ax.get());
+ */
