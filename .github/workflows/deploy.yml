@@ -1,0 +1,28 @@
+name: Deploy to github.io
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with: 
+        node-version: 12
+        registry-url: https://registry.npmjs.org/
+
+    - name: npm install, lint
+      run: |
+        npm install
+        npm run lint:fix
+        npm run build
+      
+    - name: Deploy to github.io
+      uses: JamesIves/github-pages-deploy-action@3.5.9
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: build
