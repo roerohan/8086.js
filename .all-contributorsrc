@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "roerohan",
+      "name": "Rohan Mukherjee",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/42958812?v=4",
+      "profile": "https://github.com/roerohan",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "8086.js",
+  "projectOwner": "roerohan",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
