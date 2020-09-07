@@ -24,6 +24,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "ritika-07",
+      "name": "Ritika",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/46575784?v=4",
+      "profile": "https://github.com/ritika-07",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
