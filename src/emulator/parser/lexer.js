@@ -70,11 +70,13 @@ export default class Lexer {
             end += 1;
         }
 
-        const tok = this.buffer.substring(this.position, end).toUpperCase();
-        if (instructionMnemonics.includes(tok)) {
+        const tok = this.buffer.substring(this.position, end);
+        const upperCaseTok = tok.toUpperCase();
+
+        if (instructionMnemonics.includes(upperCaseTok)) {
             const token = {
                 name: 'MNEMONIC',
-                value: tok,
+                value: upperCaseTok,
                 position: this.position,
             };
             this.position = end;
@@ -82,10 +84,10 @@ export default class Lexer {
             return token;
         }
 
-        if (registers.includes(tok)) {
+        if (registers.includes(upperCaseTok)) {
             const token = {
                 name: 'REGISTER',
-                value: tok,
+                value: upperCaseTok,
                 position: this.position,
             };
 
