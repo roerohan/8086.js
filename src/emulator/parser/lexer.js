@@ -167,7 +167,7 @@ export default class Lexer {
         return token;
     }
 
-    getToken() {
+    nextToken() {
         const invalidToken = {
             name: 'INVALID',
             value: 'Unidentified Token',
@@ -210,7 +210,7 @@ export default class Lexer {
     tokenize() {
         const tokens = [];
         while (this.position < this.bufferLength) {
-            tokens.push(this.getToken());
+            tokens.push(this.nextToken());
         }
 
         return tokens;
