@@ -199,6 +199,8 @@ export default class Lexer {
             return this.processSeparator(c);
         }
 
+        // TODO: Process hex numbers and some special characters
+
         this.position = this.bufferLength;
         return invalidToken;
     }

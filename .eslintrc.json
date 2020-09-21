@@ -46,6 +46,14 @@
             "rules": {
                 "no-param-reassign": 0
             }
+        },
+        {
+            "files": [
+                "src/emulator/**/*.js"
+            ],
+            "rules": {
+                "import/extensions": 0
+            }
         }
     ]
 }
