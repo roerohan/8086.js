@@ -11,3 +11,4 @@ console.log(tokenize('mul al'));
 console.log(tokenize('add ax, bx'));
 console.log(tokenize('mov dx, \'hello\''));
 console.log(tokenize('call someFunction'));
+console.log(tokenize('push bp; This is a comment'));
