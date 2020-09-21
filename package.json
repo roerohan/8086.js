@@ -2,6 +2,7 @@
   "name": "8086.js",
   "version": "0.1.0",
   "private": false,
+  "type": "module",
   "homepage": "https://roerohan.github.io/8086.js/",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
@@ -24,9 +25,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint \"src/**/*.{ts,js,jsx}\"",
-    "lint:fix": "eslint \"src/**/*.{ts,js,jsx}\" --fix",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "lint:fix": "eslint \"src/**/*.{ts,js,jsx}\" --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
