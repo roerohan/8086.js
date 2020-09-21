@@ -1,0 +1,44 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "roerohan",
+      "name": "Rohan Mukherjee",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/42958812?v=4",
+      "profile": "https://github.com/roerohan",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "thebongy",
+      "name": "Rishit Bansal",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/7080652?v=4",
+      "profile": "https://github.com/thebongy",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "ritika-07",
+      "name": "Ritika",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/46575784?v=4",
+      "profile": "https://github.com/ritika-07",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "8086.js",
+  "projectOwner": "roerohan",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
