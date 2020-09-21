@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
+        height: '100vh',
     },
 }));
 
@@ -25,15 +26,21 @@ export default function Home() {
 
     return (
         <div className={classes.root}>
-            <Grid container spacing={3}>
+            <Grid container spacing={1}>
                 <Grid item xs={6}>
-                    <Paper className={classes.paper}>Content for the left half.</Paper>
+                    <Paper className={classes.paper}>
+                        Addresses and Registers will be shown here.
+                    </Paper>
                 </Grid>
                 <Grid item xs={6}>
                     <AceEditor
                         mode="assembly_x86"
+                        fontSize="1rem"
                         theme="dracula"
                         // onChange={onChange}
+                        showPrintMargin={false}
+                        height="100vh"
+                        width="50vw"
                         name="editor"
                         editorProps={{ $blockScrolling: true }}
                     />

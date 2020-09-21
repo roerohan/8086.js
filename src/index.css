@@ -6,3 +6,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+#root {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  background-color: #383A59;
+  font-size: 20px;
+}
