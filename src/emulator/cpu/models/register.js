@@ -17,11 +17,11 @@ export default class Register {
             return this.value;
         }
 
-        if (half === 'l') {
+        if (half === 'L') {
             return this.l;
         }
 
-        if (half === 'h') {
+        if (half === 'H') {
             return this.h;
         }
 
@@ -41,9 +41,9 @@ export default class Register {
             return;
         }
 
-        if (half === 'l') {
+        if (half === 'L') {
             this.l = value;
-        } else if (half === 'h') {
+        } else if (half === 'H') {
             this.h = value;
         }
 
