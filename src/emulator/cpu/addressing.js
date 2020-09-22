@@ -17,7 +17,7 @@ export default class Addressing {
             }
             return this.registers.regs[op.value].get();
         case 'MEMORY':
-            return this.memory.get(this.registers.DS + op.value);
+            return this.memory.get(this.registers.regs.DS.get() + op.value);
         case 'RELATIVE':
             throw Error('Not implemented');
         default:
@@ -38,7 +38,7 @@ export default class Addressing {
             }
             return this.registers.regs[op.value].set(value);
         case 'MEMORY':
-            return this.memory.set(this.registers.DS + op.value, value);
+            return this.memory.set(this.registers.regs.DS.get() + op.value, value);
         case 'RELATIVE':
             throw Error('Not implemented');
         default:
