@@ -168,15 +168,9 @@ export default class Lexer {
     }
 
     nextToken() {
-        const invalidToken = {
-            name: 'INVALID',
-            value: 'Unidentified Token',
-            position: this.position,
-        };
-
         this.skipNonTokens();
         if (this.position >= this.bufferLength) {
-            return invalidToken;
+            return undefined;
         }
 
         const c = this.buffer[this.position];
@@ -204,13 +198,24 @@ export default class Lexer {
         // TODO: Process hex numbers and some special characters
 
         this.position = this.bufferLength;
+
+        const invalidToken = {
+            name: 'INVALID',
+            value: 'Unidentified Token',
+            position: this.position,
+        };
+
         return invalidToken;
     }
 
     tokenize() {
         const tokens = [];
         while (this.position < this.bufferLength) {
-            tokens.push(this.nextToken());
+            const nextTok = this.nextToken();
+
+            if (nextTok) {
+                tokens.push(nextTok);
+            }
         }
 
         return tokens;
