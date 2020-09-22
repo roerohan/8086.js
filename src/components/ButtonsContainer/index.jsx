@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faPlayCircle,
@@ -8,7 +8,8 @@ import {
     faArrowRight,
     faArrowLeft,
 } from '@fortawesome/free-solid-svg-icons';
-import { selectCode, selectEmulator } from '../../slices/emulatorSlice';
+import { selectCode, updateRegisters } from '../../slices/emulatorSlice';
+import emulator from '../../emulator/emulator';
 
 const useStyles = makeStyles((theme) => ({
     buttonsContainer: {
@@ -29,7 +30,8 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonsContainer() {
     const classes = useStyles();
 
-    const emulator = useSelector(selectEmulator);
+    const dispatch = useDispatch();
+
     const code = useSelector(selectCode);
 
     const loadCode = () => {
@@ -37,10 +39,9 @@ export default function ButtonsContainer() {
     };
 
     const stepClick = () => {
-        console.log(emulator);
         loadCode();
         emulator.cpu.step();
-        console.log(emulator);
+        dispatch(updateRegisters(emulator.getRegisters()));
     };
 
     return (
