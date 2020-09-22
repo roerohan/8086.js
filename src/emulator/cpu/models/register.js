@@ -68,6 +68,6 @@ export class FlagRegister extends Register {
     }
 
     getFlag(flag) {
-        return (this.get() & flag) !== 0;
+        return (this.get() & flag) === 0 ? 0 : 1;
     }
 }
