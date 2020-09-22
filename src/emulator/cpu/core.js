@@ -20,6 +20,9 @@ export default class CPU {
     step() {
         const ip = this.registers.regs.IP.get();
         const instruction = this.memory.get(this.registers.regs.CS.get() + ip);
+        if (!instruction.mnemonic) {
+            throw Error('Invalid instruction at the current instruction pointer');
+        }
         switch (instruction.mnemonic.value) {
         case 'MOV':
             if (instruction.op1.size < instruction.op2.size) {
