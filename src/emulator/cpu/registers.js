@@ -1,20 +1,21 @@
-import Register from './models/register';
+import Register from './models/register.js';
 
 export default class Registers {
     constructor() {
         this.regs = {
-            AX: Register(),
-            BX: Register(),
-            CX: Register(),
-            DX: Register(),
-            DI: Register(),
-            SI: Register(),
-            BP: Register(),
-            SP: Register(),
-            DS: Register(0),
-            ES: Register(400),
-            CS: Register(600),
-            SS: Register(200),
+            AX: new Register(),
+            BX: new Register(),
+            CX: new Register(),
+            DX: new Register(),
+            IP: new Register(),
+            DI: new Register(),
+            SI: new Register(),
+            BP: new Register(),
+            SP: new Register(),
+            DS: new Register(0),
+            ES: new Register(400),
+            CS: new Register(600),
+            SS: new Register(200),
         };
     }
 }
