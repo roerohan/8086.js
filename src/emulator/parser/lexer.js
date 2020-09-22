@@ -1,4 +1,19 @@
-import { nonToken, instructionMnemonics, registers } from './constants.js';
+import {
+    nonToken,
+    instructionMnemonics,
+    registers,
+} from './constants.js';
+import {
+    ImmediateOp,
+    RegisterOp,
+    RelativeOp,
+    MemoryOp,
+    Mnemonic,
+    Comment,
+    NewLine,
+    InvalidTokenError,
+    UnterminatedQuoteError,
+} from '../models/index.js';
 
 export default class Lexer {
     constructor(buffer) {
@@ -47,11 +62,10 @@ export default class Lexer {
     }
 
     processNewLine(c) {
-        const token = {
-            name: 'NEWLINE',
+        const token = new NewLine({
             value: c,
             position: this.position,
-        };
+        });
 
         this.position += 1;
         return token;
@@ -64,21 +78,20 @@ export default class Lexer {
             end += 1;
         }
 
-        const token = {
-            name: 'COMMENT',
+        const token = new Comment({
             value: this.buffer.substring(this.position, end),
             position: this.position,
-        };
+        });
 
         this.position = end;
 
         return token;
     }
 
-    processAlpha() {
+    processAlphaNum() {
         let end = this.position + 1;
         while (end < this.bufferLength
-            && Lexer.isAlpha(this.buffer[end])) {
+            && Lexer.isAlphaNum(this.buffer[end])) {
             end += 1;
         }
 
@@ -86,72 +99,48 @@ export default class Lexer {
         const upperCaseTok = tok.toUpperCase();
 
         if (instructionMnemonics.includes(upperCaseTok)) {
-            const token = {
-                name: 'MNEMONIC',
-                value: upperCaseTok,
-                position: this.position,
-            };
+            const token = new Mnemonic({ value: upperCaseTok, position: this.position });
             this.position = end;
-
             return token;
         }
 
         if (registers.includes(upperCaseTok)) {
-            const token = {
-                name: 'REGISTER',
-                value: upperCaseTok,
-                position: this.position,
-            };
-
+            const token = new RegisterOp({ value: upperCaseTok, position: this.position });
             this.position = end;
             return token;
         }
 
-        const token = {
-            name: 'IDENTIFIER',
-            value: tok,
-            position: this.position,
-        };
+        const numberRegex = '(0X|0B|0|)[0-9A-F]+';
+        const immediateRegex = new RegExp(`^${numberRegex}$`);
+        const memoryRegex = new RegExp(`\\[${numberRegex}\\]`);
+        const relativeRegex = /^\[[A-Z]{2}\+[A-Z]{2}\]$/;
 
-        this.position = end;
-
-        return token;
-    }
-
-    processNum() {
-        let end = this.position + 1;
-        while (end < this.bufferLength
-            && Lexer.isNum(this.buffer[end])) {
-            end += 1;
+        if (immediateRegex.test(upperCaseTok)) {
+            const token = new ImmediateOp({ value: upperCaseTok, position: this.position });
+            this.position = end;
+            return token;
         }
 
-        let tok = this.buffer.substring(this.position, end);
-        tok = parseInt(tok, 10);
+        if (memoryRegex.test(upperCaseTok)) {
+            const token = new MemoryOp({ value: upperCaseTok, position: this.position });
+            this.position = end;
+            return token;
+        }
 
-        const token = {
-            name: 'NUMBER',
-            value: tok,
-            position: this.position,
-        };
+        if (relativeRegex.test(upperCaseTok)) {
+            const token = new RelativeOp({ value: upperCaseTok, position: this.position });
+            this.position = end;
+            return token;
+        }
 
-        this.position = end;
-
-        return token;
+        throw new InvalidTokenError(this.position);
     }
 
     processQuote(quote) {
         const end = this.buffer.indexOf(quote, this.position + 1);
 
         if (end === -1) {
-            const token = {
-                name: 'INVALID',
-                value: 'Unterminated Quote',
-                position: this.position,
-            };
-
-            this.position = end;
-
-            return token;
+            throw new UnterminatedQuoteError(this.position);
         }
 
         const token = {
@@ -195,12 +184,8 @@ export default class Lexer {
             return this.processComment();
         }
 
-        if (Lexer.isAlpha(c)) {
-            return this.processAlpha();
-        }
-
-        if (Lexer.isNum(c)) {
-            return this.processNum();
+        if (Lexer.isAlphaNum(c)) {
+            return this.processAlphaNum();
         }
 
         if (Lexer.isQuote(c)) {
@@ -211,17 +196,7 @@ export default class Lexer {
             return this.processSeparator(c);
         }
 
-        // TODO: Process hex numbers and some special characters
-
-        this.position = this.bufferLength;
-
-        const invalidToken = {
-            name: 'INVALID',
-            value: 'Unidentified Token',
-            position: this.position,
-        };
-
-        return invalidToken;
+        throw new InvalidTokenError(this.position);
     }
 
     tokenize() {
