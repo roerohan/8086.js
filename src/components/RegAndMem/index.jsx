@@ -33,6 +33,9 @@ export default function RegAndMem() {
                 <Register name="SS" />
                 <Register name="CS" />
             </div>
+            <div>
+                Memory goes here.
+            </div>
         </div>
     );
 }
