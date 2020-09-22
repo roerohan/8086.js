@@ -3,9 +3,6 @@ import Memory from './memory.js';
 import Addressing from './addressing.js';
 import { flags } from '../parser/constants.js';
 
-let s = '';
-let ans = '';
-let ans1 = '';
 export default class CPU {
     constructor() {
         this.registers = new Registers();
@@ -49,11 +46,11 @@ export default class CPU {
 
         case 'ADD':
             if (!op2) {
-                s = op1.size === 8 ? regs.AX.get('l') : regs.AX.get();
+                let s = op1.size === 8 ? regs.AX.get('l') : regs.AX.get();
                 s += getAddr(op1);
                 regs.AX.set(s);
             } else {
-                s = getAddr(op1);
+                let s = getAddr(op1);
                 s += getAddr(op2);
                 setAddr(op1, s);
             }
@@ -61,12 +58,15 @@ export default class CPU {
 
         case 'DIV':
             if (op1.size === 8) {
-                const al = regs.AX.get() / getAddr(op1);
-                const ah = regs.AX.get() % getAddr(op1);
+                const al = regs.AX.get('l') / getAddr(op1);
+                const ah = regs.AX.get('l') % getAddr(op1);
                 regs.AX.set(al, 'l');
                 regs.AX.set(ah, 'h');
             } else {
-                // when operand is a word
+                const ax = regs.AX.get() / getAddr(op1);
+                const dx = regs.AX.get() % getAddr(op1);
+                regs.AX.set(ax);
+                regs.DX.set(dx);
             }
             break;
 
@@ -75,20 +75,18 @@ export default class CPU {
                 const prod = regs.AX.get('l') * getAddr(op1);
                 regs.AX.set(prod);
             } else {
-                // when operand is a word
                 const prod = regs.AX.get() * getAddr(op1);
                 regs.AX.set(prod);
+                // Store higher bits in DX
             }
             break;
 
         case 'AND':
-            ans = getAddr(op1) & getAddr(op2);
-            setAddr(op1, ans);
+            setAddr(op1, getAddr(op1) & getAddr(op2));
             break;
 
         case 'OR':
-            ans1 = getAddr(op1) | getAddr(op2);
-            setAddr(op1, ans1);
+            setAddr(op1, getAddr(op1) | getAddr(op2));
             break;
 
         default:
