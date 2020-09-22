@@ -2,7 +2,7 @@ import Lexer from './parser/lexer.js';
 import CPU from './cpu/core.js';
 import Parser from './parser/parser.js';
 
-export default class Emulator {
+class Emulator {
     constructor() {
         this.cpu = new CPU();
     }
@@ -14,6 +14,21 @@ export default class Emulator {
     }
 
     getRegisters() {
-        return this.cpu.registers.regs;
+        const regs = {};
+        Object.entries(this.cpu.registers.regs).forEach((element) => {
+            if (['A', 'B', 'C', 'D'].includes(element[0][0])) {
+                regs[`${element[0][0]}H`] = element[1].get('H');
+                regs[`${element[0][0]}L`] = element[1].get('L');
+            }
+            regs[element[0]] = element[1].get();
+        });
+
+        return regs;
+    }
+
+    getMemory() {
+        return [...this.cpu.memory.mem];
     }
 }
+
+export default new Emulator();

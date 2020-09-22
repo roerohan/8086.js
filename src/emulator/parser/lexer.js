@@ -273,6 +273,12 @@ export default class Lexer {
             }
         }
 
+        tokens.push(new NewLine({
+            value: '\n',
+            position: this.positon + 1,
+            lineNumber: this.lineNumber + 1,
+        }));
+
         return tokens;
     }
 }
