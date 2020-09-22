@@ -175,7 +175,7 @@ export default class Lexer {
         };
 
         this.skipNonTokens();
-        if (this.position > this.bufferLength) {
+        if (this.position >= this.bufferLength) {
             return invalidToken;
         }
 
