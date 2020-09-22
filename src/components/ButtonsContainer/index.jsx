@@ -33,10 +33,10 @@ export default function ButtonsContainer() {
                 <FontAwesomeIcon icon={faPlayCircle} />
             </span>
             <span className={classes.fontAwesomeIcon}>
-                <FontAwesomeIcon icon={faForward} />
+                <FontAwesomeIcon icon={faArrowRight} />
             </span>
             <span className={classes.fontAwesomeIcon}>
-                <FontAwesomeIcon icon={faArrowRight} />
+                <FontAwesomeIcon icon={faForward} />
             </span>
         </div>
     );
