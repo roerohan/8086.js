@@ -1,3 +1,5 @@
+import { InvalidTokenError } from './errors.js';
+
 function toNumber(value) {
     if (value.startsWith('0b')) {
         return parseInt(value, 2);
@@ -18,10 +20,11 @@ function toNumber(value) {
  * Base operand class.
  */
 class Operand {
-    constructor(value, position) {
+    constructor(value, position, lineNumber) {
         this.name = 'OPERAND';
         this.value = value;
         this.position = position;
+        this.lineNumber = lineNumber;
     }
 }
 
@@ -30,11 +33,18 @@ class Operand {
  * Number in the `value` attribute.
  */
 export class ImmediateOp extends Operand {
-    constructor({ value, position }) {
-        super(value, position);
+    constructor({ value, position, lineNumber }) {
+        super(value, position, lineNumber);
         this.type = 'IMMEDIATE';
 
         this.value = toNumber(value);
+
+        if (Number.isNaN(this.value)) {
+            throw new InvalidTokenError({
+                position: this.position,
+                lineNumber: this.lineNumber,
+            });
+        }
     }
 }
 
@@ -42,8 +52,8 @@ export class ImmediateOp extends Operand {
  * An object of RelativeOp
  */
 export class RelativeOp extends Operand {
-    constructor({ value, position }) {
-        super(value, position);
+    constructor({ value, position, lineNumber }) {
+        super(value, position, lineNumber);
         this.type = 'RELATIVE';
     }
 }
@@ -53,8 +63,8 @@ export class RelativeOp extends Operand {
  * register in the `value` attribute.
  */
 export class RegisterOp extends Operand {
-    constructor({ value, position }) {
-        super(value, position);
+    constructor({ value, position, lineNumber }) {
+        super(value, position, lineNumber);
         this.type = 'REGISTER';
     }
 }
@@ -64,8 +74,8 @@ export class RegisterOp extends Operand {
  * Number in the `value` attribute
  */
 export class MemoryOp extends Operand {
-    constructor({ value, position }) {
-        super(value, position);
+    constructor({ value, position, lineNumber }) {
+        super(value, position, lineNumber);
         this.type = 'MEMORY';
 
         this.value = toNumber(value.slice(1, -1));
