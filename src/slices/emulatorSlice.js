@@ -17,16 +17,16 @@ const emulatorSlice = createSlice({
         updateRegisters(state, action) {
             state.registers = action.payload;
         },
-        updateRegister(state, action) {
-            state.registers[action.payload.name] = action.payload.value;
+        updateMemory(state, action) {
+            state.memory = action.payload;
         },
     },
 });
 
 export const selectCode = (state) => state.emulator.code;
+export const selectMemory = (state) => state.emulator.memory;
 export const selectRegisters = (state) => state.emulator.registers;
-export const selectRegister = (state, name) => state.emulator.registers[name];
 
-export const { updateCode, updateRegisters, updateRegister } = emulatorSlice.actions;
+export const { updateCode, updateRegisters, updateMemory } = emulatorSlice.actions;
 
 export default emulatorSlice.reducer;
