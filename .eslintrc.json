@@ -54,6 +54,14 @@
             "rules": {
                 "import/extensions": 0
             }
+        },
+        {
+            "files": [
+                "src/emulator/models/**/*.js"
+            ],
+            "rules": {
+                "max-classes-per-file": 0
+            }
         }
     ]
 }
