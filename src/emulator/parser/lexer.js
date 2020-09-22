@@ -6,11 +6,13 @@ import {
 import {
     ImmediateOp,
     RegisterOp,
+    StringToken,
     RelativeOp,
     MemoryOp,
     Mnemonic,
     Comment,
     NewLine,
+    Separator,
     InvalidTokenError,
     UnterminatedQuoteError,
 } from '../models/index.js';
@@ -143,11 +145,10 @@ export default class Lexer {
             throw new UnterminatedQuoteError(this.position);
         }
 
-        const token = {
-            name: 'STRING',
+        const token = new StringToken({
             value: this.buffer.substring(this.position, end + 1),
             position: this.position,
-        };
+        });
 
         this.position = end + 1;
 
@@ -157,11 +158,10 @@ export default class Lexer {
     processSeparator(separator) {
         const end = this.position + 1;
 
-        const token = {
-            name: 'SEPARATOR',
+        const token = new Separator({
             value: separator,
             position: this.position,
-        };
+        });
 
         this.position = end;
 
