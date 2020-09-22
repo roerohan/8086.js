@@ -22,6 +22,9 @@ export default class CPU {
         const instruction = this.memory.get(this.registers.regs.CS.get() + ip);
         switch (instruction.mnemonic.value) {
         case 'MOV':
+            if (instruction.op1.size < instruction.op2.size) {
+                throw Error(`Can't move larger ${instruction.op2.size} bit value to ${instruction.op1.size} bit location`);
+            }
             this.addressing.set(instruction.op1, this.addressing.get(instruction.op2));
             break;
         default:

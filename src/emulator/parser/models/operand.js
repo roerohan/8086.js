@@ -1,19 +1,25 @@
 import { InvalidTokenError } from './errors.js';
 
 function toNumber(value) {
+    let intVal;
     if (value.startsWith('0B')) {
-        return parseInt(value, 2);
+        intVal = parseInt(value, 2);
+    } else if (value.startsWith('0X')) {
+        intVal = parseInt(value, 16);
+    } else if (value.startsWith('0')) {
+        intVal = parseInt(value, 8);
+    } else {
+        intVal = parseInt(value, 10);
     }
 
-    if (value.startsWith('0X')) {
-        return parseInt(value, 16);
+    const size = Math.ceil(Math.log2(intVal));
+    if (intVal > 2 ** 16) {
+        throw Error('Immediate Value too large, only max 16 bit allowd');
     }
-
-    if (value.startsWith('0')) {
-        return parseInt(value, 8);
-    }
-
-    return parseInt(value, 10);
+    return {
+        value: intVal,
+        size,
+    };
 }
 
 /**
@@ -23,6 +29,7 @@ class Operand {
     constructor(value, position, lineNumber) {
         this.name = 'OPERAND';
         this.value = value;
+        this.size = 0;
         this.position = position;
         this.lineNumber = lineNumber;
     }
@@ -37,7 +44,9 @@ export class ImmediateOp extends Operand {
         super(value, position, lineNumber);
         this.type = 'IMMEDIATE';
 
-        this.value = toNumber(value);
+        const toNum = toNumber(value);
+        this.value = toNum.value;
+        this.size = toNum.size;
 
         if (Number.isNaN(this.value)) {
             throw new InvalidTokenError({
@@ -55,6 +64,7 @@ export class RelativeOp extends Operand {
     constructor({ value, position, lineNumber }) {
         super(value, position, lineNumber);
         this.type = 'RELATIVE';
+        this.size = 16;
     }
 }
 
@@ -66,6 +76,12 @@ export class RegisterOp extends Operand {
     constructor({ value, position, lineNumber }) {
         super(value, position, lineNumber);
         this.type = 'REGISTER';
+
+        if (this.value.endsWith('L') || this.value.endsWith('H')) {
+            this.size = 8;
+        } else {
+            this.size = 16;
+        }
     }
 }
 
@@ -77,7 +93,7 @@ export class MemoryOp extends Operand {
     constructor({ value, position, lineNumber }) {
         super(value, position, lineNumber);
         this.type = 'MEMORY';
-
-        this.value = toNumber(value.slice(1, -1));
+        this.size = 16;
+        this.value = toNumber(value.slice(1, -1)).value;
     }
 }
