@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import propTypes from 'prop-types';
 
@@ -24,16 +24,28 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Register(props) {
     const classes = useStyles();
-    const { name } = props;
+    const { name, value } = props;
+
+    const [regValue, setRegValue] = useState(value);
+
+    const changeRegValue = ({ target }) => {
+        setRegValue(target.value);
+    };
 
     return (
         <div className={classes.regContainer}>
             <span className={classes.label}>{name}</span>
-            <input id={name} className={classes.register} />
+            <input
+                id={name}
+                value={regValue}
+                onChange={changeRegValue}
+                className={classes.register}
+            />
         </div>
     );
 }
 
 Register.propTypes = {
     name: propTypes.string.isRequired,
+    value: propTypes.number.isRequired,
 };

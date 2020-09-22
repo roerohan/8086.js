@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import codeReducer from '../slices/codeSlice';
+import emulatorReducer from '../slices/emulatorSlice';
 
 export default configureStore({
     reducer: {
-        code: codeReducer,
+        emulator: emulatorReducer,
     },
 });
