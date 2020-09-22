@@ -18,7 +18,6 @@ export default class CPU {
         code.forEach((elem, i) => {
             this.memory.set(cs + i, elem);
         });
-        this.registers.regs.IP.set(0);
     }
 
     step() {
