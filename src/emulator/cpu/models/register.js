@@ -50,3 +50,17 @@ export default class Register {
         this.value = (this.h << 4) + this.l;
     }
 }
+
+export class FlagRegister extends Register {
+    setFlag(flag) {
+        this.set(this.get() | flag);
+    }
+
+    unsetFlag(flag) {
+        this.set(this.get() & ~flag);
+    }
+
+    getFlag(flag) {
+        return (this.get() & flag) !== 0;
+    }
+}

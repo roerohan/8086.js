@@ -4,7 +4,7 @@ const emulator = new Emulator();
 emulator.loadCode(`
 MOV AH, 5
 MOV [2], 8
-MOV CX, 4
+MOV CL, [2]
 MOV AL, 2
 `);
 
