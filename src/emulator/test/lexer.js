@@ -19,4 +19,5 @@ mul cx
 ; Testing multiline code
 ;------------------------
 pushf
-popf`));
+popf
+`));
