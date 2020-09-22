@@ -5,6 +5,9 @@ export default class Addressing {
     }
 
     get(op) {
+        if (!op) {
+            return null;
+        }
         switch (op.type) {
         case 'IMMEDIATE':
             return op.value;

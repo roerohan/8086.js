@@ -23,67 +23,84 @@ export default class CPU {
     step() {
         const ip = this.registers.regs.IP.get();
         const instruction = this.memory.get(this.registers.regs.CS.get() + ip);
-        if (!instruction.mnemonic) {
-            throw Error('Invalid instruction at the current instruction pointer');
+
+        const { mnemonic, op1, op2 } = instruction;
+        const { regs } = this.registers;
+        const getAddr = (target) => this.addressing.get(target);
+        const setAddr = (target, value) => this.addressing.set(target, value);
+
+        if (!mnemonic) {
+            throw SyntaxError('Invalid instruction at the current instruction pointer');
         }
-        switch (instruction.mnemonic.value) {
+
+        switch (mnemonic.value) {
         case 'MOV':
-            if (instruction.op1.size < instruction.op2.size) {
-                throw Error(`Can't move larger ${instruction.op2.size} bit value to ${instruction.op1.size} bit location`);
+            if (op1.size < op2.size) {
+                throw SyntaxError(`Can't move larger ${op2.size} bit value to ${op1.size} bit location`);
             }
-            this.addressing.set(instruction.op1, this.addressing.get(instruction.op2));
+            setAddr(op1, getAddr(op2));
             break;
+
         case 'JS':
-            if (this.registers.regs.flags.getFlag(flags.sign) === 1) {
-                this.registers.regs.IP.set(instruction.op1);
+            if (regs.flags.getFlag(flags.sign) === 1) {
+                regs.IP.set(op1);
             }
             break;
+
         case 'ADD':
-            s = this.addressing.get(instruction.op1) + this.addressing.get(instruction.op2);
-            if (instruction.op1.size < s.size) { // s.size???
-                throw Error(`Can't move larger ${s.size} bit value to ${instruction.op1.size} bit location`);
+            if (!op2) {
+                s = op1.size === 8 ? regs.AX.get('l') : regs.AX.get();
+                s += getAddr(op1);
+                regs.AX.set(s);
             } else {
-                this.addressing.set(instruction.op1, s);
+                s = getAddr(op1);
+                s += getAddr(op2);
+                setAddr(op1, s);
             }
             break;
+
         case 'DIV':
-            if (instruction.op1.size === 8) {
-                const al = this.registers.regs.AX.get() / this.addressing.get(instruction.op1);
-                const ah = this.registers.regs.AX.get() % this.addressing.get(instruction.op1);
-                this.registers.regs.AX.set(al, 'l');
-                this.registers.regs.AX.set(ah, 'h');
+            if (op1.size === 8) {
+                const al = regs.AX.get() / getAddr(op1);
+                const ah = regs.AX.get() % getAddr(op1);
+                regs.AX.set(al, 'l');
+                regs.AX.set(ah, 'h');
             } else {
                 // when operand is a word
             }
             break;
+
         case 'MUL':
-            if (instruction.op1.size === 8) {
-                const prod = this.registers.regs.AX.get('l') * this.addressing.get(instruction.op1);
-                this.registers.regs.AX.set(prod);
+            if (op1.size === 8) {
+                const prod = regs.AX.get('l') * getAddr(op1);
+                regs.AX.set(prod);
             } else {
                 // when operand is a word
-                const prod = this.registers.regs.AX.get() * this.addressing.get(instruction.op1);
-                this.registers.regs.AX.set(prod);
+                const prod = regs.AX.get() * getAddr(op1);
+                regs.AX.set(prod);
             }
             break;
+
         case 'AND':
-            ans = this.addressing.get(instruction.op1) & this.addressing.get(instruction.op2);
-            this.addressing.set(instruction.op1, ans);
+            ans = getAddr(op1) & getAddr(op2);
+            setAddr(op1, ans);
             break;
+
         case 'OR':
-            ans1 = this.addressing.get(instruction.op1) | this.addressing.get(instruction.op2);
-            this.addressing.set(instruction.op1, ans1);
+            ans1 = getAddr(op1) | getAddr(op2);
+            setAddr(op1, ans1);
             break;
+
         default:
             break;
         }
 
         // Example for setting/unsetting/checking flag register
         // import { flags } from '../parser/constants.js';
-        // this.registers.regs.flags.setFlag(flags.zero);
-        // this.registers.regs.flags.setFlag(flags.auxilliary);
-        // this.registers.regs.flags.unsetFlag(flags.auxilliary);
-        // console.log(this.registers.regs.flags.getFlag(flags.zero));
-        this.registers.regs.IP.set(ip + 1);
+        // regs.flags.setFlag(flags.zero);
+        // regs.flags.setFlag(flags.auxilliary);
+        // regs.flags.unsetFlag(flags.auxilliary);
+        // console.log(regs.flags.getFlag(flags.zero));
+        regs.IP.set(ip + 1);
     }
 }
