@@ -13,7 +13,10 @@
  * ins_1_0 -> 1 address or 0 address instruction
  * ins_0 -> 0 address instruction
  */
-import { SyntaxError } from './models/index.js';
+import {
+    SyntaxError,
+    Instruction,
+} from './models/index.js';
 
 export default class Parser {
     constructor(tokens) {
@@ -49,13 +52,11 @@ export default class Parser {
                 throw new SyntaxError();
             }
 
-            const parsedInstruction = {
+            this.instructions.push(new Instruction({
                 mnemonic: instruction[0],
-                operand_1: instruction[1] || null,
-                operand_2: instruction[3] || null,
-            };
-
-            this.instructions.push(parsedInstruction);
+                op1: instruction[1] || null,
+                op2: instruction[3] || null,
+            }));
         });
 
         return this.instructions;
