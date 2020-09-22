@@ -1,3 +1,19 @@
+/**
+ * Grammar:
+ *
+ * S: ins_2 op_1 op_2
+ * S: ins_2_1 op_1 [op_2]
+ * S: ins_1 op_1
+ * S: ins_1_0 [op_1]
+ * S: ins_0
+ *
+ * ins_2 -> 2 address instruction
+ * ins_2_1 -> 2 address or 1 address instruction
+ * ins_1 -> 1 address instruction
+ * ins_1_0 -> 1 address or 0 address instruction
+ * ins_0 -> 0 address instruction
+ */
+
 export default class Parser {
     constructor(tokens) {
         this.parseTree = {};
@@ -13,7 +29,7 @@ export default class Parser {
                     instructions.push(instruction);
                 }
                 instruction = [];
-            } else {
+            } else if (token.name !== 'COMMENT') {
                 instruction.push(token);
             }
         });
@@ -21,27 +37,3 @@ export default class Parser {
         return instructions;
     }
 }
-
-console.log(
-    Parser.getInstructionsFromTokens([
-        { name: 'NEWLINE', value: '\n', position: 0 },
-        { name: 'MNEMONIC', value: 'ADD', position: 1 },
-        { name: 'REGISTER', value: 'AX', position: 5 },
-        { name: 'SEPARATOR', value: ',', position: 7 },
-        { name: 'REGISTER', value: 'BX', position: 9 },
-        { name: 'NEWLINE', value: '\n', position: 11 },
-        { name: 'MNEMONIC', value: 'MUL', position: 12 },
-        { name: 'REGISTER', value: 'CX', position: 16 },
-        { name: 'NEWLINE', value: '\n', position: 18 },
-        { name: 'COMMENT', value: ';------------------------', position: 19 },
-        { name: 'NEWLINE', value: '\n', position: 44 },
-        { name: 'COMMENT', value: '; Testing multiline code', position: 45 },
-        { name: 'NEWLINE', value: '\n', position: 69 },
-        { name: 'COMMENT', value: ';------------------------', position: 70 },
-        { name: 'NEWLINE', value: '\n', position: 95 },
-        { name: 'MNEMONIC', value: 'PUSHF', position: 96 },
-        { name: 'NEWLINE', value: '\n', position: 101 },
-        { name: 'MNEMONIC', value: 'POPF', position: 102 },
-        { name: 'NEWLINE', value: '\n', position: 106 },
-    ]),
-);
