@@ -34,6 +34,13 @@ export default class Register {
      * @param {string} half Specify the half in which the value is to be set (if any).
      */
     set(value, half) {
+        if (half) {
+            if (value > 2 ** 8) {
+                throw Error("Can't set more than 8 bit value to an 8 bit register");
+            }
+        } else if (value > 2 ** 16) {
+            throw Error("Can't set more than 8 bit value to an 8 bit register");
+        }
         if (!half) {
             this.value = value;
             this.l = value & 255;
