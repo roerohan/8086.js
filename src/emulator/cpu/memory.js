@@ -13,7 +13,9 @@ export default class Memory {
     }
 
     set(addr, val) {
-        // TODO: Maybe overflow checks later
+        if (val > 2 ** 16) {
+            throw Error("Can't set greater than 16 bit value in memory location");
+        }
         this.mem[addr] = val;
     }
 
