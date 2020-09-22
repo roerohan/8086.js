@@ -1,11 +1,11 @@
 import { InvalidTokenError } from './errors.js';
 
 function toNumber(value) {
-    if (value.startsWith('0b')) {
+    if (value.startsWith('0B')) {
         return parseInt(value, 2);
     }
 
-    if (value.startsWith('0x')) {
+    if (value.startsWith('0X')) {
         return parseInt(value, 16);
     }
 
