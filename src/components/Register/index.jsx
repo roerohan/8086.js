@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import propTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,6 +34,9 @@ export default function Register(props) {
 
     const [regValue, setRegValue] = useState(registers[name]);
 
+    useEffect(() => {
+        setRegValue(registers[name]);
+    }, [registers[name]]);
     const changeRegValue = ({ target }) => {
         console.log(target.value);
         emulator.cpu.registers.regs[name].set(target.value);
