@@ -18,7 +18,7 @@ export default class Addressing {
         case 'REGISTER':
             if (['L', 'H'].includes(op.value[1])) {
                 if (!['A', 'B', 'C', 'D'].includes(op.value[0])) {
-                    throw Error("Only AX,BX,CX,DX registers can have 'L' or 'H' suffix");
+                    throw SyntaxError("Only AX,BX,CX,DX registers can have 'L' or 'H' suffix");
                 }
                 return regs[`${op.value[0]}X`].get(op.value[1]);
             }
@@ -28,10 +28,10 @@ export default class Addressing {
             return this.memory.get(regs.DS.get() + op.value);
 
         case 'RELATIVE':
-            throw Error('Not implemented');
+            throw SyntaxError('Not implemented');
 
         default:
-            throw Error("Invalid Adressing mode, this shoudln't happen ideally");
+            throw SyntaxError("Invalid Adressing mode, this shoudln't happen ideally");
         }
     }
 
@@ -40,12 +40,12 @@ export default class Addressing {
 
         switch (op.type) {
         case 'IMMEDIATE':
-            throw Error("Can't set to immediate value???");
+            throw SyntaxError("Can't set to immediate value???");
 
         case 'REGISTER':
             if (['L', 'H'].includes(op.value[1])) {
                 if (!['A', 'B', 'C', 'D'].includes(op.value[0])) {
-                    throw Error("Only AX,BX,CX,DX registers can have 'L' or 'H' suffix");
+                    throw SyntaxError("Only AX,BX,CX,DX registers can have 'L' or 'H' suffix");
                 }
                 return regs[`${op.value[0]}X`].set(value, op.value[1]);
             }
@@ -55,10 +55,10 @@ export default class Addressing {
             return this.memory.set(regs.DS.get() + op.value, value);
 
         case 'RELATIVE':
-            throw Error('Not implemented');
+            throw SyntaxError('Not implemented');
 
         default:
-            throw Error("Invalid Adressing mode, this shoudln't happen ideally");
+            throw SyntaxError("Invalid Adressing mode, this shoudln't happen ideally");
         }
     }
 }
