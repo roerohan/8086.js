@@ -16,4 +16,8 @@ export default class Emulator {
     getRegisters() {
         return this.cpu.registers.regs;
     }
+
+    resetState() {
+        this.cpu = new CPU();
+    }
 }
