@@ -1,8 +1,6 @@
 export const nonToken = [
     ' ',
-    '\n',
     '\t',
-    '\r',
 ];
 
 export const mainRegisters = [

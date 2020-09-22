@@ -8,10 +8,11 @@ export default class Lexer {
     }
 
     static isNewLine(c) {
-        if (c === '\n' || c === '\r') {
-            return true;
-        }
-        return false;
+        return /^[\n\r]$/.test(c);
+    }
+
+    static isComment(c) {
+        return /^[;]$/.test(c);
     }
 
     static isAlpha(c) {
@@ -60,6 +61,17 @@ export default class Lexer {
 
         this.position = end;
 
+        return token;
+    }
+
+    processNewLine(c) {
+        const token = {
+            name: 'NEWLINE',
+            value: c,
+            position: this.position,
+        };
+
+        this.position += 1;
         return token;
     }
 
@@ -175,7 +187,11 @@ export default class Lexer {
 
         const c = this.buffer[this.position];
 
-        if (c === ';') {
+        if (Lexer.isNewLine(c)) {
+            return this.processNewLine(c);
+        }
+
+        if (Lexer.isComment(c)) {
             return this.processComment();
         }
 
