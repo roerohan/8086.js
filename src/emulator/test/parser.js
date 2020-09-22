@@ -17,5 +17,8 @@ pushf
 popf
 `);
 
-const instructions = Parser.getInstructionsFromTokens(tokens);
-console.log(instructions);
+// const instructions = Parser.getInstructionsFromTokens(tokens);
+// console.log(instructions);
+
+const parser = new Parser(tokens);
+console.log(parser.parse());
