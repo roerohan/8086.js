@@ -39,7 +39,7 @@ export default class Register {
                 throw Error("Can't set more than 8 bit value to an 8 bit register");
             }
         } else if (value > 2 ** 16) {
-            throw Error("Can't set more than 8 bit value to an 8 bit register");
+            throw Error("Can't set more than 8 bit value to an 16 bit register");
         }
         if (!half) {
             this.value = value;
