@@ -1,4 +1,4 @@
-import Register from './models/register.js';
+import Register, { FlagRegister } from './models/register.js';
 
 export default class Registers {
     constructor() {
@@ -16,6 +16,7 @@ export default class Registers {
             ES: new Register(400),
             CS: new Register(600),
             SS: new Register(200),
+            flags: new FlagRegister(),
         };
     }
 }

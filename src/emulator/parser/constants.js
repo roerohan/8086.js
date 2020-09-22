@@ -141,3 +141,16 @@ export const instructionMnemonics = [
     'XLATB',
     'XOR',
 ];
+
+const bitmask = (index) => 0b1 << index;
+
+export const flags = {
+    sign: bitmask(7),
+    zero: bitmask(6),
+    auxilliary: bitmask(4),
+    carry: bitmask(0),
+    overflow: bitmask(11),
+    directional: bitmask(10),
+    interrupt: bitmask(9),
+    trap: bitmask(8),
+};
