@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import propTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+
+import emulator from '../../emulator/emulator';
+import { selectRegisters, updateRegisters } from '../../slices/emulatorSlice';
 
 const useStyles = makeStyles((theme) => ({
     register: {
@@ -24,12 +28,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Register(props) {
     const classes = useStyles();
-    const { name, value } = props;
+    const { name } = props;
+    const registers = useSelector(selectRegisters);
+    const dispatch = useDispatch();
 
-    const [regValue, setRegValue] = useState(value);
+    const [regValue, setRegValue] = useState(registers[name]);
 
     const changeRegValue = ({ target }) => {
+        console.log(target.value);
+        emulator.cpu.registers.regs[name].set(target.value);
         setRegValue(target.value);
+        dispatch(updateRegisters(registers));
     };
 
     return (
@@ -47,5 +56,4 @@ export default function Register(props) {
 
 Register.propTypes = {
     name: propTypes.string.isRequired,
-    value: propTypes.number.isRequired,
 };

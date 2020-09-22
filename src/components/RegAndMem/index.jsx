@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
 
-import { selectEmulator } from '../../slices/emulatorSlice';
+import { selectRegisters } from '../../slices/emulatorSlice';
 import Register from '../Register';
 
 const useStyles = makeStyles(() => ({
@@ -19,25 +19,25 @@ const useStyles = makeStyles(() => ({
 export default function RegAndMem() {
     const classes = useStyles();
 
-    const registers = useSelector(selectEmulator).getRegisters();
+    const registers = useSelector(selectRegisters);
 
     return (
         <div className={classes.regAndMem}>
             <div className={classes.regRow}>
-                <Register name="AX" value={registers.AX.value} />
-                <Register name="BX" value={registers.BX.value} />
-                <Register name="CX" value={registers.CX.value} />
-                <Register name="DX" value={registers.DX.value} />
-                <Register name="BP" value={registers.BP.value} />
-                <Register name="SP" value={registers.SP.value} />
+                <Register name="AX" value={registers.AX} />
+                <Register name="BX" value={registers.BX} />
+                <Register name="CX" value={registers.CX} />
+                <Register name="DX" value={registers.DX} />
+                <Register name="BP" value={registers.BP} />
+                <Register name="SP" value={registers.SP} />
             </div>
             <div className={classes.regRow}>
-                <Register name="SI" value={registers.SI.value} />
-                <Register name="DI" value={registers.DI.value} />
-                <Register name="DS" value={registers.DS.value} />
-                <Register name="ES" value={registers.ES.value} />
-                <Register name="SS" value={registers.SS.value} />
-                <Register name="CS" value={registers.CS.value} />
+                <Register name="SI" value={registers.SI} />
+                <Register name="DI" value={registers.DI} />
+                <Register name="DS" value={registers.DS} />
+                <Register name="ES" value={registers.ES} />
+                <Register name="SS" value={registers.SS} />
+                <Register name="CS" value={registers.CS} />
             </div>
             <div>
                 Memory goes here.
