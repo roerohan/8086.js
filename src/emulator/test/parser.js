@@ -10,6 +10,7 @@ function tokenize(code) {
 const tokens = tokenize(`
 add ax, 5
 mul cx
+mov [1], 6
 ;------------------------
 ; Testing multiline code
 ;------------------------

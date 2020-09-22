@@ -16,6 +16,15 @@ export class UnterminatedQuoteError extends Error {
     }
 }
 
+export class UnterminatedBracketError extends Error {
+    constructor({ position, lineNumber }) {
+        super();
+        this.name = 'Unterminated Bracket';
+        this.position = position;
+        this.lineNumber = lineNumber;
+    }
+}
+
 export class SyntaxError extends Error {
     constructor({ position, lineNumber }) {
         super();

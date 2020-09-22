@@ -7,6 +7,7 @@ export { default as Instruction } from './instruction.js';
 export {
     InvalidTokenError,
     UnterminatedQuoteError,
+    UnterminatedBracketError,
     SyntaxError,
 } from './errors.js';
 export {

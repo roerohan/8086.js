@@ -15,6 +15,7 @@ import {
     Separator,
     InvalidTokenError,
     UnterminatedQuoteError,
+    UnterminatedBracketError,
 } from './models/index.js';
 
 export default class Lexer {
@@ -43,6 +44,10 @@ export default class Lexer {
 
     static isAlphaNum(c) {
         return /^[A-Za-z0-9]$/.test(c);
+    }
+
+    static isBracket(c) {
+        return /^[[]$/.test(c);
     }
 
     static isQuote(c) {
@@ -127,8 +132,6 @@ export default class Lexer {
 
         const numberRegex = '(0X|0B|0|)[0-9A-F]+';
         const immediateRegex = new RegExp(`^${numberRegex}$`);
-        const memoryRegex = new RegExp(`\\[${numberRegex}\\]`);
-        const relativeRegex = /^\[[A-Z]{2}\+[A-Z]{2}\]$/;
 
         if (immediateRegex.test(upperCaseTok)) {
             const token = new ImmediateOp({
@@ -140,13 +143,34 @@ export default class Lexer {
             return token;
         }
 
+        throw new InvalidTokenError({
+            position: this.position,
+            lineNumber: this.lineNumber,
+        });
+    }
+
+    processBrackets() {
+        const end = this.buffer.indexOf(']', this.position + 1);
+        if (end === -1) {
+            throw new UnterminatedBracketError({
+                position: this.position,
+                lineNumber: this.lineNumber,
+            });
+        }
+
+        const upperCaseTok = this.buffer.substring(this.position, end + 1).toUpperCase();
+
+        const numberRegex = '(0X|0B|0|)[0-9A-F]+';
+        const memoryRegex = new RegExp(`\\[${numberRegex}\\]`);
+        const relativeRegex = /^\[[A-Z]{2}\+[A-Z]{2}\]$/;
+
         if (memoryRegex.test(upperCaseTok)) {
             const token = new MemoryOp({
                 value: upperCaseTok,
                 position: this.position,
                 lineNumber: this.lineNumber,
             });
-            this.position = end;
+            this.position = end + 1;
             return token;
         }
 
@@ -156,7 +180,7 @@ export default class Lexer {
                 position: this.position,
                 lineNumber: this.lineNumber,
             });
-            this.position = end;
+            this.position = end + 1;
             return token;
         }
 
@@ -219,6 +243,10 @@ export default class Lexer {
 
         if (Lexer.isAlphaNum(c)) {
             return this.processAlphaNum();
+        }
+
+        if (Lexer.isBracket(c)) {
+            return this.processBrackets();
         }
 
         if (Lexer.isQuote(c)) {
