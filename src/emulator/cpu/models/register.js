@@ -2,8 +2,8 @@ export default class Register {
     /**
      * Initialize value, lower half `l` and upper half `h` to 0.
      */
-    constructor() {
-        this.value = 0;
+    constructor(initial) {
+        this.value = initial || 0;
         this.h = 0;
         this.l = 0;
     }
@@ -17,11 +17,11 @@ export default class Register {
             return this.value;
         }
 
-        if (half === 'l') {
+        if (half === 'L') {
             return this.l;
         }
 
-        if (half === 'h') {
+        if (half === 'H') {
             return this.h;
         }
 
@@ -34,6 +34,13 @@ export default class Register {
      * @param {string} half Specify the half in which the value is to be set (if any).
      */
     set(value, half) {
+        if (half) {
+            if (value > 2 ** 8) {
+                throw Error("Can't set more than 8 bit value to an 8 bit register");
+            }
+        } else if (value > 2 ** 16) {
+            throw Error("Can't set more than 8 bit value to an 16 bit register");
+        }
         if (!half) {
             this.value = value;
             this.l = value & 255;
@@ -41,22 +48,26 @@ export default class Register {
             return;
         }
 
-        if (half === 'l') {
+        if (half === 'L') {
             this.l = value;
-        } else if (half === 'h') {
+        } else if (half === 'H') {
             this.h = value;
         }
 
-        this.value = (this.h << 8) + this.l;
+        this.value = (this.h << 4) + this.l;
     }
 }
 
-/**
- * Sample usage:
- *
- * const ax = new Register();
- * let al = ax.get('l');
- * al += 10;
- * ax.set(al, 'l');
- * console.log('The value in ax is: ' + ax.get());
- */
+export class FlagRegister extends Register {
+    setFlag(flag) {
+        this.set(this.get() | flag);
+    }
+
+    unsetFlag(flag) {
+        this.set(this.get() & ~flag);
+    }
+
+    getFlag(flag) {
+        return (this.get() & flag) === 0 ? 0 : 1;
+    }
+}
