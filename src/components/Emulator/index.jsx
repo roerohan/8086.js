@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Display from '../Display';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -16,7 +17,7 @@ export default function Emulator() {
 
     return (
         <Paper className={classes.paper}>
-            Addresses and Registers will be shown here.
+            <Display />
         </Paper>
     );
 }
