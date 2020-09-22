@@ -36,7 +36,8 @@ export default function Register(props) {
 
     useEffect(() => {
         setRegValue(registers[name]);
-    }, [registers[name]]);
+    }, [name, registers]);
+
     const changeRegValue = ({ target }) => {
         console.log(target.value);
         emulator.cpu.registers.regs[name].set(target.value);
