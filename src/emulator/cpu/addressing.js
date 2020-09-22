@@ -5,7 +5,7 @@ export default class Addressing {
     }
 
     get(op) {
-        switch (op.name) {
+        switch (op.type) {
         case 'IMMEDIATE':
             return op.value;
         case 'REGISTER':
@@ -26,7 +26,7 @@ export default class Addressing {
     }
 
     set(op, value) {
-        switch (op.name) {
+        switch (op.type) {
         case 'IMMEDIATE':
             throw Error("Can't set to immediate value???");
         case 'REGISTER':
@@ -34,7 +34,7 @@ export default class Addressing {
                 if (!['A', 'B', 'C', 'D'].includes(op.value[0])) {
                     throw Error("Only AX,BX,CX,DX registers can have 'L' or 'H' suffix");
                 }
-                return this.registers.set[`${op.value[0]}X`].set(value, op.value[1]);
+                return this.registers.regs[`${op.value[0]}X`].set(value, op.value[1]);
             }
             return this.registers.regs[op.value].set(value);
         case 'MEMORY':
