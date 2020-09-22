@@ -29,6 +29,10 @@ class Emulator {
     getMemory() {
         return [...this.cpu.memory.mem];
     }
+
+    resetState() {
+        this.cpu = new CPU();
+    }
 }
 
 export default new Emulator();
