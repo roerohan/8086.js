@@ -13,11 +13,12 @@
  * ins_1_0 -> 1 address or 0 address instruction
  * ins_0 -> 0 address instruction
  */
+import { SyntaxError } from './models/index.js';
 
 export default class Parser {
     constructor(tokens) {
-        this.parseTree = {};
-        this.instructions = Parser.getInstructionsFromTokens(tokens);
+        this.rawInstructions = Parser.getInstructionsFromTokens(tokens);
+        this.instructions = [];
     }
 
     static getInstructionsFromTokens(tokens) {
@@ -35,5 +36,28 @@ export default class Parser {
         });
 
         return instructions;
+    }
+
+    parse() {
+        this.rawInstructions.forEach((instruction) => {
+            if (instruction.length > 4) {
+                throw new SyntaxError();
+            }
+
+            if (instruction.length > 2
+                && instruction[2].name !== 'SEPARATOR') {
+                throw new SyntaxError();
+            }
+
+            const parsedInstruction = {
+                mnemonic: instruction[0],
+                operand_1: instruction[1] || null,
+                operand_2: instruction[3] || null,
+            };
+
+            this.instructions.push(parsedInstruction);
+        });
+
+        return this.instructions;
     }
 }

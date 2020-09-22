@@ -15,7 +15,7 @@ import {
     Separator,
     InvalidTokenError,
     UnterminatedQuoteError,
-} from '../models/index.js';
+} from './models/index.js';
 
 export default class Lexer {
     constructor(buffer) {
