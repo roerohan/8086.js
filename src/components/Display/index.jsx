@@ -10,6 +10,10 @@ const useStyles = makeStyles(() => ({
         padding: '0.5rem',
         border: '1px solid #44475A',
     },
+    heading: {
+        borderBottom: '1px solid #44475A',
+        paddingBottom: '0.5rem',
+    },
 }));
 
 export default function Display() {
@@ -17,7 +21,7 @@ export default function Display() {
 
     return (
         <div className={classes.display}>
-            Display
+            <div className={classes.heading}>Display</div>
         </div>
     );
 }
