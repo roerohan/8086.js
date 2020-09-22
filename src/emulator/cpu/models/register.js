@@ -2,8 +2,8 @@ export default class Register {
     /**
      * Initialize value, lower half `l` and upper half `h` to 0.
      */
-    constructor() {
-        this.value = 0;
+    constructor(initial) {
+        this.value = initial || 0;
         this.h = 0;
         this.l = 0;
     }
