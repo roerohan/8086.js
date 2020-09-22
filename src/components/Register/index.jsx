@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '1.2rem',
         padding: '0.3rem',
         textAlign: 'center',
+        border: `1px solid ${theme.palette.text.secondary}`,
     },
     label: {
         width: '3rem',
