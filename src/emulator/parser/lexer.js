@@ -22,6 +22,7 @@ export default class Lexer {
         this.position = 0;
         this.buffer = buffer;
         this.bufferLength = buffer.length;
+        this.lineNumber = 1;
     }
 
     static isNewLine(c) {
@@ -64,9 +65,12 @@ export default class Lexer {
     }
 
     processNewLine(c) {
+        this.lineNumber += 1;
+
         const token = new NewLine({
             value: c,
             position: this.position,
+            lineNumber: this.lineNumber,
         });
 
         this.position += 1;
@@ -83,6 +87,7 @@ export default class Lexer {
         const token = new Comment({
             value: this.buffer.substring(this.position, end),
             position: this.position,
+            lineNumber: this.lineNumber,
         });
 
         this.position = end;
@@ -101,13 +106,21 @@ export default class Lexer {
         const upperCaseTok = tok.toUpperCase();
 
         if (instructionMnemonics.includes(upperCaseTok)) {
-            const token = new Mnemonic({ value: upperCaseTok, position: this.position });
+            const token = new Mnemonic({
+                value: upperCaseTok,
+                position: this.position,
+                lineNumber: this.lineNumber,
+            });
             this.position = end;
             return token;
         }
 
         if (registers.includes(upperCaseTok)) {
-            const token = new RegisterOp({ value: upperCaseTok, position: this.position });
+            const token = new RegisterOp({
+                value: upperCaseTok,
+                position: this.position,
+                lineNumber: this.lineNumber,
+            });
             this.position = end;
             return token;
         }
@@ -118,36 +131,55 @@ export default class Lexer {
         const relativeRegex = /^\[[A-Z]{2}\+[A-Z]{2}\]$/;
 
         if (immediateRegex.test(upperCaseTok)) {
-            const token = new ImmediateOp({ value: upperCaseTok, position: this.position });
+            const token = new ImmediateOp({
+                value: upperCaseTok,
+                position: this.position,
+                lineNumber: this.lineNumber,
+            });
             this.position = end;
             return token;
         }
 
         if (memoryRegex.test(upperCaseTok)) {
-            const token = new MemoryOp({ value: upperCaseTok, position: this.position });
+            const token = new MemoryOp({
+                value: upperCaseTok,
+                position: this.position,
+                lineNumber: this.lineNumber,
+            });
             this.position = end;
             return token;
         }
 
         if (relativeRegex.test(upperCaseTok)) {
-            const token = new RelativeOp({ value: upperCaseTok, position: this.position });
+            const token = new RelativeOp({
+                value: upperCaseTok,
+                position: this.position,
+                lineNumber: this.lineNumber,
+            });
             this.position = end;
             return token;
         }
 
-        throw new InvalidTokenError(this.position);
+        throw new InvalidTokenError({
+            position: this.position,
+            lineNumber: this.lineNumber,
+        });
     }
 
     processQuote(quote) {
         const end = this.buffer.indexOf(quote, this.position + 1);
 
         if (end === -1) {
-            throw new UnterminatedQuoteError(this.position);
+            throw new UnterminatedQuoteError({
+                position: this.position,
+                lineNumber: this.lineNumber,
+            });
         }
 
         const token = new StringToken({
             value: this.buffer.substring(this.position, end + 1),
             position: this.position,
+            lineNumber: this.lineNumber,
         });
 
         this.position = end + 1;
@@ -161,6 +193,7 @@ export default class Lexer {
         const token = new Separator({
             value: separator,
             position: this.position,
+            lineNumber: this.lineNumber,
         });
 
         this.position = end;
@@ -196,7 +229,10 @@ export default class Lexer {
             return this.processSeparator(c);
         }
 
-        throw new InvalidTokenError(this.position);
+        throw new InvalidTokenError({
+            position: this.position,
+            lineNumber: this.lineNumber,
+        });
     }
 
     tokenize() {
