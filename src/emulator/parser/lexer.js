@@ -46,6 +46,17 @@ export default class Lexer {
         }
     }
 
+    processNewLine(c) {
+        const token = {
+            name: 'NEWLINE',
+            value: c,
+            position: this.position,
+        };
+
+        this.position += 1;
+        return token;
+    }
+
     processComment() {
         let end = this.position + 1;
         while (end < this.bufferLength
@@ -61,17 +72,6 @@ export default class Lexer {
 
         this.position = end;
 
-        return token;
-    }
-
-    processNewLine(c) {
-        const token = {
-            name: 'NEWLINE',
-            value: c,
-            position: this.position,
-        };
-
-        this.position += 1;
         return token;
     }
 
