@@ -93,7 +93,7 @@ export default function RegAndMem() {
                             <span className={classes.value}>Value</span>
                         </div>
                         {memory.map((item, index) => (
-                            <div className={classes.memoryRow}>
+                            <div key={Math.random() * 10000} className={classes.memoryRow}>
                                 <span className={classes.address}>
                                     {index}
                                 </span>
