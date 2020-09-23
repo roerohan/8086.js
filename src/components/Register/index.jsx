@@ -38,6 +38,7 @@ export default function Register(props) {
     useEffect(() => {
         setRegValue(registers[name]);
     }, [reg, name, registers]);
+
     const changeRegValue = ({ target }) => {
         console.log(target.value);
         emulator.cpu.registers.regs[name].set(target.value);
@@ -45,12 +46,14 @@ export default function Register(props) {
         dispatch(updateRegisters(registers));
     };
 
+    const displayReg = (r) => r.toString(16).padStart(4, '0');
+
     return (
         <div className={classes.regContainer}>
             <span className={classes.label}>{name}</span>
             <input
                 id={name}
-                value={regValue.toString(16).padStart(4, '0')}
+                value={displayReg(regValue)}
                 onChange={changeRegValue}
                 className={classes.register}
             />
