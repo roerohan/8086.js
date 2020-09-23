@@ -62,8 +62,6 @@ export default function RegAndMem() {
 
     const memory = useSelector(selectMemory);
 
-    console.log(memory);
-
     return (
         <div className={classes.regAndMem}>
             <div className={classes.regRow}>

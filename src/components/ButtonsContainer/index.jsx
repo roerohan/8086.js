@@ -8,7 +8,11 @@ import {
     faArrowRight,
     faArrowLeft,
 } from '@fortawesome/free-solid-svg-icons';
-import { selectCode, updateRegisters } from '../../slices/emulatorSlice';
+import {
+    selectCode,
+    updateRegisters,
+    // updateMemory,
+} from '../../slices/emulatorSlice';
 import emulator from '../../emulator/emulator';
 
 const useStyles = makeStyles((theme) => ({
@@ -42,6 +46,7 @@ export default function ButtonsContainer() {
         loadCode();
         emulator.cpu.step();
         dispatch(updateRegisters(emulator.getRegisters()));
+        // dispatch(updateMemory(emulator.getMemory()));
     };
 
     return (
