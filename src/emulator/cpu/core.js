@@ -44,6 +44,39 @@ export default class CPU {
             }
             break;
 
+        case 'JNS': {
+            if (regs.flags.getFlag(flags.sign) === 0) {
+                regs.IP.set(op1);
+            }
+            break;
+        }
+        case 'JO': {
+            if (regs.flags.getFlag(flags.overflow) === 1) {
+                regs.IP.set(op1);
+            }
+            break;
+        }
+        case 'JNO': {
+            if (regs.flags.getFlag(flags.overflow) === 0) {
+                regs.IP.set(op1);
+            }
+            break;
+        }
+        case 'JP':
+        case 'JPE':
+        {
+            if (regs.flags.getFlag(flags.parity) === 1) {
+                regs.IP.set(op1);
+            }
+            break;
+        }
+        case 'JNP':
+        {
+            if (regs.flags.getFlag(flags.parity) === 0) {
+                regs.IP.set(op1);
+            }
+            break;
+        }
         case 'ADD':
             if (!op2) {
                 let s = op1.size === 8 ? regs.AX.get('l') : regs.AX.get();

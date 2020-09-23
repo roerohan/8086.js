@@ -153,4 +153,5 @@ export const flags = {
     directional: bitmask(10),
     interrupt: bitmask(9),
     trap: bitmask(8),
+    parity: bitmask(2),
 };
