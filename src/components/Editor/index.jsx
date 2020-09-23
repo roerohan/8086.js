@@ -15,6 +15,14 @@ export default function Editor() {
         dispatch(updateCode(code));
     };
 
+    const defaultMsg = `; Welcome to 8086.js!
+;
+; This is still under development and supports few instructions such as MOV, ADD, AND, etc.
+; Currently, it does not support pre-processor directives or interrupts.
+; Contribute to 8086.js at https://github.com/roerohan/8086.js :D
+
+`;
+
     return (
         <div>
             <ButtonsContainer />
@@ -24,6 +32,7 @@ export default function Editor() {
                 fontSize="1rem"
                 theme="dracula"
                 onChange={onChange}
+                value={defaultMsg}
                 showPrintMargin={false}
                 height="100vh"
                 width="50vw"
