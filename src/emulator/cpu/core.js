@@ -40,25 +40,25 @@ export default class CPU {
 
         case 'JS':
             if (regs.flags.getFlag(flags.sign) === 1) {
-                regs.IP.set(op1);
+                ip = getAddr(op1) - 1;
             }
             break;
 
         case 'JNS': {
             if (regs.flags.getFlag(flags.sign) === 0) {
-                regs.IP.set(op1);
+                ip = getAddr(op1) - 1;
             }
             break;
         }
         case 'JO': {
             if (regs.flags.getFlag(flags.overflow) === 1) {
-                regs.IP.set(op1);
+                ip = getAddr(op1) - 1;
             }
             break;
         }
         case 'JNO': {
             if (regs.flags.getFlag(flags.overflow) === 0) {
-                regs.IP.set(op1);
+                ip = getAddr(op1) - 1;
             }
             break;
         }
@@ -66,14 +66,14 @@ export default class CPU {
         case 'JPE':
         {
             if (regs.flags.getFlag(flags.parity) === 1) {
-                regs.IP.set(op1);
+                ip = getAddr(op1) - 1;
             }
             break;
         }
         case 'JNP':
         {
             if (regs.flags.getFlag(flags.parity) === 0) {
-                regs.IP.set(op1);
+                ip = getAddr(op1) - 1;
             }
             break;
         }
