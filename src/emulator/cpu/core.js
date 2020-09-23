@@ -88,7 +88,28 @@ export default class CPU {
         case 'OR':
             setAddr(op1, getAddr(op1) | getAddr(op2));
             break;
-
+        case 'SUB': {
+            const s1 = getAddr(op1);
+            const s2 = getAddr(op2);
+            const ans = s1 - s2;
+            setAddr(op1, ans);
+            break;
+        }
+        case 'CMP': {
+            const s1 = getAddr(op1);
+            const s2 = getAddr(op2);
+            if (s1 === s2) {
+                regs.flags.setFlag(flags.zero);
+                regs.flags.unsetFlag(flags.carry);
+            } else if (s1 > s2) {
+                regs.flags.unsetFlag(flags.zero);
+                regs.flags.unsetFlag(flags.carry);
+            } else {
+                regs.flags.setFlag(flags.carry);
+                regs.flags.unsetFlag(flags.zero);
+            }
+            break;
+        }
         default:
             break;
         }
@@ -99,6 +120,7 @@ export default class CPU {
         // regs.flags.setFlag(flags.auxilliary);
         // regs.flags.unsetFlag(flags.auxilliary);
         // console.log(regs.flags.getFlag(flags.zero));
+        console.log(regs);
         regs.IP.set(ip + 1);
     }
 }
