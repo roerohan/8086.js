@@ -54,7 +54,7 @@ export default class Register {
             this.h = value;
         }
 
-        this.value = (this.h << 4) + this.l;
+        this.value = (this.h << 8) + this.l;
     }
 }
 
