@@ -10,6 +10,8 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         color: theme.palette.text.primary,
         height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
     },
 }));
 

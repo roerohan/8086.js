@@ -9,9 +9,9 @@ import Register from '../Register';
 const useStyles = makeStyles((theme) => ({
     regAndMem: {
         textAlign: 'left',
-        marginTop: '2rem',
+        marginTop: '2vh',
         display: 'flex',
-        overflowX: 'scroll',
+        overflowX: 'auto',
     },
     regRow: {
         width: '10.5rem',

@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(() => ({
     display: {
         width: 'inherit',
-        height: '45vh',
+        height: '40%',
         background: '#21222C',
         borderRadius: '0.5rem',
         padding: '0.5rem',
