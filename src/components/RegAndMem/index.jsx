@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
 
-import { selectRegisters, selectMemory } from '../../slices/emulatorSlice';
+import { selectMemory } from '../../slices/emulatorSlice';
 import Register from '../Register';
 
 const useStyles = makeStyles((theme) => ({
@@ -11,16 +11,17 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'left',
         marginTop: '2rem',
         display: 'flex',
+        overflowX: 'scroll',
     },
     regRow: {
-        width: '12rem',
+        width: '10.5rem',
     },
     paper: {
         color: theme.palette.text.primary,
         borderRadius: '0.5rem',
         padding: '0.5rem',
         border: '1px solid #44475A',
-        width: '27vw',
+        width: '23rem',
         height: '43vh',
         background: '#21222C',
         overflowY: 'scroll',
@@ -44,10 +45,10 @@ const useStyles = makeStyles((theme) => ({
         borderBottom: '1px solid #44475A',
     },
     address: {
-        width: '10rem',
+        width: '3rem',
         display: 'inline-block',
-        marginLeft: '3rem',
         textAlign: 'center',
+        marginLeft: '4rem',
     },
     value: {
         textAlign: 'center',
@@ -59,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
 export default function RegAndMem() {
     const classes = useStyles();
 
-    const registers = useSelector(selectRegisters);
     const memory = useSelector(selectMemory);
 
     console.log(memory);
@@ -67,20 +67,24 @@ export default function RegAndMem() {
     return (
         <div className={classes.regAndMem}>
             <div className={classes.regRow}>
-                <Register name="AX" value={registers.AX} />
-                <Register name="BX" value={registers.BX} />
-                <Register name="CX" value={registers.CX} />
-                <Register name="DX" value={registers.DX} />
-                <Register name="BP" value={registers.BP} />
-                <Register name="SP" value={registers.SP} />
+                <Register name="AX" />
+                <Register name="BX" />
+                <Register name="CX" />
+                <Register name="DX" />
+                <Register name="BP" />
+                <Register name="SP" />
             </div>
             <div className={classes.regRow}>
-                <Register name="SI" value={registers.SI} />
-                <Register name="DI" value={registers.DI} />
-                <Register name="DS" value={registers.DS} />
-                <Register name="ES" value={registers.ES} />
-                <Register name="SS" value={registers.SS} />
-                <Register name="CS" value={registers.CS} />
+                <Register name="SI" />
+                <Register name="DI" />
+                <Register name="DS" />
+                <Register name="ES" />
+                <Register name="SS" />
+                <Register name="CS" />
+            </div>
+            <div className={classes.regRow}>
+                <Register name="IP" />
+                <Register name="flags" />
             </div>
             <div>
                 <Paper className={classes.paper}>

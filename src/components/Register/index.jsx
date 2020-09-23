@@ -50,7 +50,7 @@ export default function Register(props) {
             <span className={classes.label}>{name}</span>
             <input
                 id={name}
-                value={regValue}
+                value={regValue.toString(16).padStart(4, '0')}
                 onChange={changeRegValue}
                 className={classes.register}
             />
