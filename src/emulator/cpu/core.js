@@ -18,7 +18,7 @@ export default class CPU {
     }
 
     step() {
-        const ip = this.registers.regs.IP.get();
+        let ip = this.registers.regs.IP.get();
         const instruction = this.memory.get(this.registers.regs.CS.get() + ip);
 
         const { mnemonic, op1, op2 } = instruction;
@@ -108,6 +108,14 @@ export default class CPU {
                 regs.flags.setFlag(flags.carry);
                 regs.flags.unsetFlag(flags.zero);
             }
+            break;
+        }
+        case 'NOT': {
+            setAddr(op1, ~getAddr(op1));
+            break;
+        }
+        case 'JMP': {
+            ip = getAddr(op1) - 1;
             break;
         }
         default:
