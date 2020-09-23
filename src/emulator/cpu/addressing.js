@@ -8,7 +8,7 @@ export default class Addressing {
         if (!op) {
             return null;
         }
-
+        console.log(op);
         const { regs } = this.registers;
 
         switch (op.type) {
