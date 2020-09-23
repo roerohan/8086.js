@@ -177,7 +177,7 @@ export default class CPU {
         // regs.flags.setFlag(flags.auxilliary);
         // regs.flags.unsetFlag(flags.auxilliary);
         // console.log(regs.flags.getFlag(flags.zero));
-        console.log(regs);
+
         regs.IP.set(ip + 1);
     }
 }
