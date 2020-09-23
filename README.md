@@ -13,7 +13,7 @@
   <h3 align="center">8086.js</h3>
 
   <p align="center">
-    A web-based 8086 emulator built with Javascript.
+    A basic web-based 8086 emulator built with Javascript.
     <br />
     <a href="https://github.com/roerohan/8086.js"><strong>Explore the docs »</strong></a>
     <br />
@@ -37,6 +37,7 @@
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
 * [Usage](#usage)
+* [Basic Workflow](#basic-workflow)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
@@ -49,13 +50,14 @@
 
 <!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
-8086.js is a web based Intel 8086 emulator.
+`8086.js` is a basic 8086 emulator built using Javascript, hosted at [https://roerohan.github.io/8086.js/](https://roerohan.github.io/8086.js/).
 
 ### Built With
 
 * [React.js](https://reactjs.org/docs/getting-started.html)
 * [Redux](https://redux.js.org/tutorials/essentials/part-1-overview-concepts)
 * [Material UI](https://material-ui.com/getting-started/usage/)
+* [Ace](https://github.com/ajaxorg/ace)
 
 
 
@@ -91,6 +93,8 @@ npm install
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+> Note: `8086.js` does not support all instructions, pre-processor directives and interrupts yet. You can check out the supported instructions in the `switch-case` [here](./src/emulator/cpu/core.js).
+
 To run the React App locally, you can run the following command.
 
 1. Run the React App
@@ -100,7 +104,20 @@ npm start
 ```
 
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+## Basic Workflow
+
+The UI is split into 2 major halves, the right half is the `editor` and the left half is the `emulator`. Instructions can be written in the editor, and when they are executed, the registers and memory in the emulator get updated accordingly. There are a few steps which happen in the background to make this possible.
+
+1. An object of the [Emulator](./src/emulator/emulator.js) class is exported, which is the point of interaction between the frontend and the emulation logic.
+
+2. First, the [lexer](./src/emulator/parser/lexer.js) divides the source code into tokens and sends them to a [parser](./src/emulator/parser/parser.js). The parser is responsible for extracting instructions from the tokens and converting them to a form that the `CPU` understands.
+
+3. The [CPU](./src/emulator/cpu/core.js) reads the mnemonic and the operands that were sent to it by the parser, and according to these values, it executes the instructions.
+
+> Note: The communication between the parser and the CPU is NOT in terms of `shellcode`, i.e, `opcode`s and `operands`. The CPU recognizes an instruction by it's `mnemonic`, such as `MOV` or `ADD`. 
+
+
+<!-- _For more examples, please refer to the [Documentation](https://example.com)_ -->
 
 
 
