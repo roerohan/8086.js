@@ -18,7 +18,7 @@ export default class CPU {
     }
 
     step() {
-        const ip = this.registers.regs.IP.get();
+        let ip = this.registers.regs.IP.get();
         const instruction = this.memory.get(this.registers.regs.CS.get() + ip);
 
         const { mnemonic, op1, op2 } = instruction;
@@ -88,7 +88,52 @@ export default class CPU {
         case 'OR':
             setAddr(op1, getAddr(op1) | getAddr(op2));
             break;
-
+        case 'SUB': {
+            const s1 = getAddr(op1);
+            const s2 = getAddr(op2);
+            const ans = s1 - s2;
+            setAddr(op1, ans);
+            break;
+        }
+        case 'CMP': {
+            const s1 = getAddr(op1);
+            const s2 = getAddr(op2);
+            if (s1 === s2) {
+                regs.flags.setFlag(flags.zero);
+                regs.flags.unsetFlag(flags.carry);
+            } else if (s1 > s2) {
+                regs.flags.unsetFlag(flags.zero);
+                regs.flags.unsetFlag(flags.carry);
+            } else {
+                regs.flags.setFlag(flags.carry);
+                regs.flags.unsetFlag(flags.zero);
+            }
+            break;
+        }
+        case 'NOT': {
+            setAddr(op1, ~getAddr(op1));
+            break;
+        }
+        case 'JMP': {
+            ip = getAddr(op1) - 1;
+            break;
+        }
+        case 'JE':
+        case 'JZ':
+        {
+            if (regs.flags.getFlag(flags.zero) === 1) {
+                ip = getAddr(op1) - 1;
+            }
+            break;
+        }
+        case 'JNE':
+        case 'JNZ':
+        {
+            if (regs.flags.getFlag(flags.zero) === 0) {
+                ip = getAddr(op1) - 1;
+            }
+            break;
+        }
         default:
             break;
         }
@@ -99,6 +144,7 @@ export default class CPU {
         // regs.flags.setFlag(flags.auxilliary);
         // regs.flags.unsetFlag(flags.auxilliary);
         // console.log(regs.flags.getFlag(flags.zero));
+        console.log(regs);
         regs.IP.set(ip + 1);
     }
 }
