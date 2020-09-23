@@ -118,6 +118,22 @@ export default class CPU {
             ip = getAddr(op1) - 1;
             break;
         }
+        case 'JE':
+        case 'JZ':
+        {
+            if (regs.flags.getFlag(flags.zero) === 1) {
+                ip = getAddr(op1) - 1;
+            }
+            break;
+        }
+        case 'JNE':
+        case 'JNZ':
+        {
+            if (regs.flags.getFlag(flags.zero) === 0) {
+                ip = getAddr(op1) - 1;
+            }
+            break;
+        }
         default:
             break;
         }
