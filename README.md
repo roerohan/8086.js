@@ -48,9 +48,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<!-- [![Product Name Screen Shot][product-screenshot]](https://example.com) -->
 
 `8086.js` is a basic 8086 emulator built using Javascript, hosted at [https://roerohan.github.io/8086.js/](https://roerohan.github.io/8086.js/).
+
+<img src="./public/8086.js-hosted.png" />
 
 ### Built With
 
