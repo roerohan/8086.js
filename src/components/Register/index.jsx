@@ -41,7 +41,7 @@ export default function Register(props) {
     const reg = registers[name];
     useEffect(() => {
         setRegValue(convertAndPad(registers[name], base));
-    }, [reg, name, registers]);
+    }, [reg, name, registers, base]);
 
     const changeRegValue = ({ target }) => {
         const registerValue = parseInt(target.value, base);
@@ -58,7 +58,7 @@ export default function Register(props) {
 
     const handleBlur = useCallback(({ target }) => {
         setRegValue(target.value.padStart(4, '0'));
-    }, [regValue]);
+    }, []);
 
     return (
         <div className={classes.regContainer}>
