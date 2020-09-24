@@ -32,7 +32,7 @@ export default function Register(props) {
     const registers = useSelector(selectRegisters);
     const dispatch = useDispatch();
 
-    const [regValue, setRegValue] = useState(registers[name]);
+    const [regValue, setRegValue] = useState(parseInt(registers[name], 16));
     const [editing, setEditing] = useState(false);
 
     const reg = registers[name];
