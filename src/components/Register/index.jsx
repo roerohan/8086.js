@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import propTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,7 +32,8 @@ export default function Register(props) {
     const registers = useSelector(selectRegisters);
     const dispatch = useDispatch();
 
-    const [regValue, setRegValue] = useState(registers[name]);
+    const [regValue, setRegValue] = useState(parseInt(registers[name], 16));
+    const [editing, setEditing] = useState(false);
 
     const reg = registers[name];
     useEffect(() => {
@@ -46,7 +47,15 @@ export default function Register(props) {
         dispatch(updateRegisters(registers));
     };
 
-    const displayReg = (r) => r.toString(16).padStart(4, '0');
+    const handleFocus = useCallback(() => {
+        setEditing(true);
+    }, []);
+
+    const handleBlur = useCallback(() => {
+        setEditing(false);
+    }, []);
+
+    const displayReg = (r) => (editing ? r : r.toString(16).padStart(4, '0'));
 
     return (
         <div className={classes.regContainer}>
@@ -54,7 +63,9 @@ export default function Register(props) {
             <input
                 id={name}
                 value={displayReg(regValue)}
+                onBlur={handleBlur}
                 onChange={changeRegValue}
+                onFocus={handleFocus}
                 className={classes.register}
             />
         </div>
