@@ -26,46 +26,48 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+// convert a decimal number [toConvert] to a number with base [base] and pad with zeros
+const convertAndPad = (toConvert, base) => toConvert.toString(base).padStart(4, '0');
+
+const maxRegisterValue = 0xffff;
+
 export default function Register(props) {
     const classes = useStyles();
-    const { name } = props;
+    const { base, name } = props;
     const registers = useSelector(selectRegisters);
     const dispatch = useDispatch();
 
-    const [regValue, setRegValue] = useState(parseInt(registers[name], 16));
-    const [editing, setEditing] = useState(false);
-
+    const [regValue, setRegValue] = useState(convertAndPad(registers[name], base));
     const reg = registers[name];
     useEffect(() => {
-        setRegValue(registers[name]);
+        setRegValue(convertAndPad(registers[name], base));
     }, [reg, name, registers]);
 
     const changeRegValue = ({ target }) => {
-        console.log(target.value);
-        emulator.cpu.registers.regs[name].set(target.value);
-        setRegValue(target.value);
-        dispatch(updateRegisters(registers));
+        const registerValue = parseInt(target.value, base);
+
+        // ensure the user did not enter a value that exceeds a 16 bit value and
+        // that an invalid value was not entered (e.g. 'r')
+        if (registerValue <= maxRegisterValue && registerValue.toString(16) === target.value) {
+            console.log(target.value, registerValue);
+            emulator.cpu.registers.regs[name].set(registerValue);
+            setRegValue(target.value);
+            dispatch(updateRegisters(registers));
+        }
     };
 
-    const handleFocus = useCallback(() => {
-        setEditing(true);
-    }, []);
-
-    const handleBlur = useCallback(() => {
-        setEditing(false);
-    }, []);
-
-    const displayReg = (r) => (editing ? r : r.toString(16).padStart(4, '0'));
+    const handleBlur = useCallback(({ target }) => {
+        setRegValue(target.value.padStart(4, '0'));
+    }, [regValue]);
 
     return (
         <div className={classes.regContainer}>
             <span className={classes.label}>{name}</span>
             <input
                 id={name}
-                value={displayReg(regValue)}
+                value={regValue}
                 onBlur={handleBlur}
                 onChange={changeRegValue}
-                onFocus={handleFocus}
                 className={classes.register}
             />
         </div>
@@ -74,4 +76,9 @@ export default function Register(props) {
 
 Register.propTypes = {
     name: propTypes.string.isRequired,
+    base: propTypes.number,
+};
+
+Register.defaultProps = {
+    base: 16,
 };
