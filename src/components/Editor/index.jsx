@@ -5,8 +5,8 @@ import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/mode-assembly_x86';
 import 'ace-builds/src-noconflict/theme-dracula';
 
-import { updateCode } from '../../slices/emulatorSlice';
-import ButtonsContainer from '../ButtonsContainer';
+import { updateCode } from 'slices/emulatorSlice';
+import ButtonsContainer from 'components/ButtonsContainer';
 
 export default function Editor() {
     const dispatch = useDispatch();
