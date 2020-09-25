@@ -1,6 +1,6 @@
-import Lexer from './parser/lexer.js';
-import CPU from './cpu/core.js';
-import Parser from './parser/parser.js';
+import Lexer from 'emulator/parser/lexer.js';
+import CPU from 'emulator/cpu/core.js';
+import Parser from 'emulator/parser/parser.js';
 
 class Emulator {
     constructor() {

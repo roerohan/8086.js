@@ -1,7 +1,7 @@
-import Registers from './registers.js';
-import Memory from './memory.js';
-import Addressing from './addressing.js';
-import { flags } from '../parser/constants.js';
+import Registers from 'emulator/cpu/registers.js';
+import Memory from 'emulator/cpu/memory.js';
+import Addressing from 'emulator/cpu/addressing.js';
+import { flags } from 'emulator/parser/constants.js';
 
 export default class CPU {
     constructor() {

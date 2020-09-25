@@ -1,4 +1,4 @@
-import Register, { FlagRegister } from './models/register.js';
+import Register, { FlagRegister } from 'emulator/cpu/models/register.js';
 
 export default class Registers {
     constructor() {
