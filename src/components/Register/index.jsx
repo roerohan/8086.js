@@ -44,11 +44,14 @@ export default function Register(props) {
     }, [reg, name, registers, base]);
 
     const changeRegValue = ({ target }) => {
-        const registerValue = parseInt(target.value, base);
+        // if target.value === '', then count that as zero
+        const registerValue = parseInt(target.value, base) || 0;
 
         // ensure the user did not enter a value that exceeds a 16 bit value and
         // that an invalid value was not entered (e.g. 'r')
-        if (registerValue <= maxRegisterValue && registerValue.toString(base) == target.value) {
+        if (registerValue <= maxRegisterValue &&
+            // we have to trim zeros so that we can compare 0 with '0000'
+            registerValue.toString(base) == (target.value.replace(/^0+/, '') || 0)) {
             console.log(target.value, registerValue);
             emulator.cpu.registers.regs[name].set(registerValue);
             setRegValue(target.value);
