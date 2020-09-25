@@ -22,7 +22,7 @@ export default function NotificationError() {
         <Collapse in={error.isRaised}>
             <Alert severity="error" onClose={closeNotification}>
                 <AlertTitle>
-                    {`${error.name}: ${error.message}`}
+                    {`${error.name}: ${error.message || error.token}`}
                 </AlertTitle>
 
                 {

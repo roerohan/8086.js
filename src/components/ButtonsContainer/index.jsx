@@ -49,9 +49,10 @@ export default function ButtonsContainer() {
             dispatch(updateRegisters(emulator.getRegisters()));
         } catch (err) {
             dispatch(raiseError({
+                name: err.name,
+                token: err.token,
                 message: err.message,
                 position: err.position,
-                name: err.name,
                 lineNumber: err.lineNumber,
             }));
         }
