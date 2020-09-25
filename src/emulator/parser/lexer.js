@@ -144,6 +144,7 @@ export default class Lexer {
         }
 
         throw new InvalidTokenError({
+            token: upperCaseTok,
             position: this.position,
             lineNumber: this.lineNumber,
         });
@@ -185,6 +186,7 @@ export default class Lexer {
         }
 
         throw new InvalidTokenError({
+            token: upperCaseTok,
             position: this.position,
             lineNumber: this.lineNumber,
         });
@@ -258,6 +260,7 @@ export default class Lexer {
         }
 
         throw new InvalidTokenError({
+            token: c,
             position: this.position,
             lineNumber: this.lineNumber,
         });
