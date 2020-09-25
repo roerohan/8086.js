@@ -3,8 +3,8 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Editor from '../../components/Editor';
-import Emulator from '../../components/Emulator';
+import Editor from 'components/Editor';
+import Emulator from 'components/Emulator';
 
 const useStyles = makeStyles(() => ({
     root: {

@@ -12,8 +12,8 @@ import {
     selectCode,
     updateRegisters,
     // updateMemory,
-} from '../../slices/emulatorSlice';
-import emulator from '../../emulator/emulator';
+} from 'slices/emulatorSlice';
+import emulator from 'emulator/emulator';
 
 const useStyles = makeStyles((theme) => ({
     buttonsContainer: {

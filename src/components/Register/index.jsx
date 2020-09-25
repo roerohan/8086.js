@@ -3,8 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import propTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
-import emulator from '../../emulator/emulator';
-import { selectRegisters, updateRegisters } from '../../slices/emulatorSlice';
+import emulator from 'emulator/emulator';
+import { selectRegisters, updateRegisters } from 'slices/emulatorSlice';
 
 const useStyles = makeStyles((theme) => ({
     register: {

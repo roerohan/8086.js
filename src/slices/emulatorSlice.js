@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import emulator from '../emulator/emulator';
+import emulator from 'emulator/emulator';
 
 const initialState = {
     registers: emulator.getRegisters(),

@@ -16,7 +16,7 @@
 import {
     SyntaxError,
     Instruction,
-} from './models/index.js';
+} from 'emulator/parser/models/index.js';
 
 export default class Parser {
     constructor(tokens) {
