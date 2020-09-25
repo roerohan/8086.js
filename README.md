@@ -55,7 +55,7 @@
 
 ### Built With
 
-* [React.js](https://reactjs.org/docs/getting-started.html)
+* [React.js](https://arkdownreactjs.org/docs/getting-started.html)
 * [Redux](https://redux.js.org/tutorials/essentials/part-1-overview-concepts)
 * [Material UI](https://material-ui.com/getting-started/usage/)
 * [Ace](https://github.com/ajaxorg/ace)
@@ -71,8 +71,8 @@ To get a local copy up and running follow these simple steps.
 
 You will need the following to be able to run the project.
 
-* npm
-* node (Node.js)
+* [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+* [node (Node.js)](https://nodejs.org)
 
 
 
@@ -84,11 +84,14 @@ You will need the following to be able to run the project.
 git clone https://github.com/roerohan/8086.js.git
 ```
 
-2. Install NPM packages
+2. Install NPM packages using (npm or yarn)
 
 ```sh
-npm install
+npm install or yarn install
 ```
+
+**Note:** If installing the packages with `npm` you get errors use `yarn` to install them.
+
 
 
 <!-- USAGE EXAMPLES -->
@@ -101,7 +104,7 @@ To run the React App locally, you can run the following command.
 1. Run the React App
 
 ```sh
-npm start
+npm start or yarn start
 ```
 
 
