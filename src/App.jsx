@@ -1,9 +1,9 @@
 import React from 'react';
-import './App.css';
+import 'App.css';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
-import Home from './pages/Home';
+import Home from 'pages/Home';
 
 /**
  * Theme color references:

@@ -3,8 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
 import { Paper } from '@material-ui/core';
 
-import { selectMemory } from '../../slices/emulatorSlice';
-import Register from '../Register';
+import { selectMemory } from 'slices/emulatorSlice';
+import Register from 'components/Register';
 
 const useStyles = makeStyles((theme) => ({
     regAndMem: {

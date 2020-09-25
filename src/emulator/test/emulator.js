@@ -1,4 +1,4 @@
-import Emulator from '../emulator.js';
+import Emulator from 'emulator/emulator.js';
 
 const emulator = new Emulator();
 emulator.loadCode(`

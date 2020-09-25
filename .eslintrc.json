@@ -63,5 +63,12 @@
                 "max-classes-per-file": 0
             }
         }
-    ]
+    ],
+    "settings": {
+        "import/resolver": {
+          "node": {
+            "paths": ["src"]
+        }
+    }
+  }
 }

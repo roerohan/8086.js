@@ -1,4 +1,4 @@
-import { InvalidTokenError } from './errors.js';
+import { InvalidTokenError } from 'emulator/parser/models/errors.js';
 
 function toNumber(value) {
     let intVal;

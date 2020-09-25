@@ -1,4 +1,4 @@
-import Register from '../cpu/models/register.js';
+import Register from 'emulator/cpu/models/register.js';
 
 const ax = new Register();
 let al = ax.get('l');

@@ -1,5 +1,5 @@
-import Lexer from '../parser/lexer.js';
-import Parser from '../parser/parser.js';
+import Lexer from 'emulator/parser/lexer.js';
+import Parser from 'emulator/parser/parser.js';
 
 function tokenize(code) {
     console.log(`\nCode: ${code}`);

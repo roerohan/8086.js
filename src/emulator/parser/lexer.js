@@ -2,7 +2,7 @@ import {
     nonToken,
     instructionMnemonics,
     registers,
-} from './constants.js';
+} from 'emulator/parser/constants.js';
 import {
     ImmediateOp,
     RegisterOp,
@@ -16,7 +16,7 @@ import {
     InvalidTokenError,
     UnterminatedQuoteError,
     UnterminatedBracketError,
-} from './models/index.js';
+} from 'emulator/parser/models/index.js';
 
 export default class Lexer {
     constructor(buffer) {

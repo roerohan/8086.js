@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Display from '../Display';
-import RegAndMem from '../RegAndMem';
+import Display from 'components/Display';
+import RegAndMem from 'components/RegAndMem';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
