@@ -47,7 +47,6 @@ export default function Editor() {
                 mode="assembly_x86"
                 fontSize="1rem"
                 theme="dracula"
-                cursorStart={6}
                 onChange={onChange}
                 value={codeStorage || defaultMsg}
                 showPrintMargin={false}
