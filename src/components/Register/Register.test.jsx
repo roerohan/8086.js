@@ -4,8 +4,8 @@ import { cleanup, fireEvent, render } from '@testing-library/react';
 
 import { Provider } from 'react-redux';
 
-import emulator from '../../emulator/emulator';
-import store from '../../store/store';
+import emulator from 'emulator/emulator';
+import store from 'store/store';
 import Register from './index';
 
 const registerName = 'AX';
