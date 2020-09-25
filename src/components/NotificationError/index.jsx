@@ -24,6 +24,20 @@ export default function NotificationError() {
                 <AlertTitle>
                     {`${error.name}: ${error.message}`}
                 </AlertTitle>
+
+                {
+                    error.position
+                        ? (
+                            <>
+                                Please check out line:
+                                <strong>
+                                    {` ${error.lineNumber}`}
+                                </strong>
+                            </>
+                        )
+                        : null
+                }
+
             </Alert>
         </Collapse>
     );
