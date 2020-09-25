@@ -1,6 +1,6 @@
 [![Issues][issues-shield]][issues-url]
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <!-- PROJECT LOGO -->
@@ -168,6 +168,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/roerohan"><img src="https://avatars0.githubusercontent.com/u/42958812?v=4" width="100px;" alt=""/><br /><sub><b>Rohan Mukherjee</b></sub></a><br /><a href="https://github.com/roerohan/8086.js/commits?author=roerohan" title="Code">💻</a> <a href="https://github.com/roerohan/8086.js/commits?author=roerohan" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/thebongy"><img src="https://avatars1.githubusercontent.com/u/7080652?v=4" width="100px;" alt=""/><br /><sub><b>Rishit Bansal</b></sub></a><br /><a href="https://github.com/roerohan/8086.js/commits?author=thebongy" title="Code">💻</a> <a href="https://github.com/roerohan/8086.js/commits?author=thebongy" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/ritika-07"><img src="https://avatars2.githubusercontent.com/u/46575784?v=4" width="100px;" alt=""/><br /><sub><b>Ritika</b></sub></a><br /><a href="https://github.com/roerohan/8086.js/commits?author=ritika-07" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/capellini"><img src="https://avatars3.githubusercontent.com/u/75311?v=4" width="100px;" alt=""/><br /><sub><b>Rob Capellini</b></sub></a><br /><a href="https://github.com/roerohan/8086.js/commits?author=capellini" title="Code">💻</a></td>
+    <td align="center"><a href="https://josesp.netlify.com/"><img src="https://avatars3.githubusercontent.com/u/23442814?v=4" width="100px;" alt=""/><br /><sub><b>Jose M. Segura Polanco</b></sub></a><br /><a href="https://github.com/roerohan/8086.js/commits?author=DarkCode01" title="Code">💻</a></td>
   </tr>
 </table>
 
