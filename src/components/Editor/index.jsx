@@ -7,6 +7,7 @@ import 'ace-builds/src-noconflict/theme-dracula';
 
 import { updateCode } from 'slices/emulatorSlice';
 import ButtonsContainer from 'components/ButtonsContainer';
+import NotificationError from 'components/NotificationError';
 
 export default function Editor() {
     const dispatch = useDispatch();
@@ -25,6 +26,8 @@ export default function Editor() {
 
     return (
         <div>
+            <NotificationError />
+
             <ButtonsContainer />
 
             <AceEditor
