@@ -48,7 +48,7 @@ export default function Register(props) {
 
         // ensure the user did not enter a value that exceeds a 16 bit value and
         // that an invalid value was not entered (e.g. 'r')
-        if (registerValue <= maxRegisterValue && registerValue.toString(16) === target.value) {
+        if (registerValue <= maxRegisterValue && registerValue.toString(base) == target.value) {
             console.log(target.value, registerValue);
             emulator.cpu.registers.regs[name].set(registerValue);
             setRegValue(target.value);
