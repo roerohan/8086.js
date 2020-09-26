@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'inline-block',
         textAlign: 'center',
         background: 'none',
+        color: '#fff',
     },
 }));
 
