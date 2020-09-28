@@ -11,7 +11,7 @@ import {
 import {
     selectCode,
     updateRegisters,
-    // updateMemory,
+    raiseError,
 } from 'slices/emulatorSlice';
 import emulator from 'emulator/emulator';
 
@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'inline-block',
         textAlign: 'center',
         background: 'none',
+        color: theme.palette.text.primary,
     },
 }));
 
@@ -43,10 +44,19 @@ export default function ButtonsContainer() {
     };
 
     const stepClick = () => {
-        loadCode();
-        emulator.cpu.step();
-        dispatch(updateRegisters(emulator.getRegisters()));
-        // dispatch(updateMemory(emulator.getMemory()));
+        try {
+            loadCode();
+            emulator.cpu.step();
+            dispatch(updateRegisters(emulator.getRegisters()));
+        } catch (err) {
+            dispatch(raiseError({
+                name: err.name,
+                token: err.token,
+                message: err.message,
+                position: err.position,
+                lineNumber: err.lineNumber,
+            }));
+        }
     };
 
     return (
