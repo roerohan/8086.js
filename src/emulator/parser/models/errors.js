@@ -1,9 +1,10 @@
 export class InvalidTokenError extends Error {
-    constructor({ position, lineNumber }) {
+    constructor({ token, position, lineNumber }) {
         super();
         this.name = 'Invalid Token';
         this.position = position;
         this.lineNumber = lineNumber;
+        this.token = token;
     }
 }
 
