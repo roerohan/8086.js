@@ -8,7 +8,7 @@ import { selectRegisters, updateRegisters } from 'slices/emulatorSlice';
 
 const useStyles = makeStyles((theme) => ({
     register: {
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: theme.palette.background.main,
         color: theme.palette.text.primary,
         width: '4rem',
         fontSize: '1.2rem',
