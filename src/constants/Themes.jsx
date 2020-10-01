@@ -1,14 +1,22 @@
+import { createMuiTheme } from '@material-ui/core';
+
 const Themes = {
-    dracula: {
-        fgColor: '#f8f8f2',
-        bgColor: '#282a36',
-        dark: '#44475a',
-        primary: '#6272a4',
-        primText: '#FFFFFF',
-        error: '#ff5555',
-        default: '#44475a',
-        warning: '',
-    },
+    dracula: createMuiTheme({
+        palette: {
+            backgroudColor: '',
+            background: {
+                main: '#282A36',
+                raised: '#21222C',
+            },
+            text: {
+                primary: '#F8F8F2',
+                secondary: '#6272A4',
+            },
+            border: {
+                main: '#44475A',
+            },
+        },
+    }),
     vs2015: {
         fgColor: '#C3DDE1',
         bgColor: '#1E1E1E',
