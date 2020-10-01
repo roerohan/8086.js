@@ -12,6 +12,8 @@ import {
     selectCode,
     updateRegisters,
     raiseError,
+    stepBack,
+    updateMemory,
 } from 'slices/emulatorSlice';
 import emulator from 'emulator/emulator';
 
@@ -59,6 +61,7 @@ export default function ButtonsContainer() {
             loadCode();
             emulator.cpu.step();
             dispatch(updateRegisters(emulator.getRegisters()));
+            dispatch(updateMemory(emulator.getMemory()));
         } catch (err) {
             dispatch(raiseError({
                 name: err.name,
@@ -73,7 +76,7 @@ export default function ButtonsContainer() {
     return (
         <div className={classes.buttonsContainer}>
             <div className={classes.buttonWrapper}>
-                <button type="button" className={classes.button}>
+                <button type="button" className={classes.button} onClick={() => dispatch(stepBack())}>
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
                 <button type="button" className={classes.button}>
