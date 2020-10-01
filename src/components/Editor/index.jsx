@@ -1,21 +1,34 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { updateCode, selectState } from 'slices/emulatorSlice';
 
-import AceEditor from 'react-ace';
-import 'ace-builds/src-noconflict/mode-assembly_x86';
-import 'ace-builds/src-noconflict/theme-dracula';
-
-import { updateCode, selectError, selectCode } from 'slices/emulatorSlice';
 import ButtonsContainer from 'components/ButtonsContainer';
 import NotificationError from 'components/NotificationError';
+import ThemeEditor from 'components/ThemeEditor';
+import AceEditor from 'react-ace';
+
+// themes styles and hightligths
+import 'ace-builds/src-noconflict/mode-assembly_x86';
+import 'ace-builds/src-noconflict/theme-dracula';
+import 'ace-builds/src-noconflict/theme-terminal';
+import 'ace-builds/src-noconflict/theme-xcode';
+import 'ace-builds/src-noconflict/theme-monokai';
+import 'ace-builds/src-noconflict/theme-chrome';
+import 'ace-builds/src-noconflict/theme-github';
+import 'ace-builds/src-noconflict/theme-gruvbox';
 
 export default function Editor() {
     const dispatch = useDispatch();
 
-    const error = useSelector(selectError);
-    const codeStorage = useSelector(selectCode);
+    // get state data
+    const {
+        error,
+        code,
+        theme,
+    } = useSelector(selectState);
     let annotation = {};
 
+    // create annotation using error.
     if (error.isRaised) {
         annotation = {
             row: error.lineNumber - 1,
@@ -25,8 +38,8 @@ export default function Editor() {
         };
     }
 
-    const onChange = (code) => {
-        dispatch(updateCode(code));
+    const onChange = (newCode) => {
+        dispatch(updateCode(newCode));
     };
 
     const defaultMsg = `; Welcome to 8086.js!
@@ -46,9 +59,9 @@ export default function Editor() {
             <AceEditor
                 mode="assembly_x86"
                 fontSize="1rem"
-                theme="dracula"
+                theme={theme}
                 onChange={onChange}
-                value={codeStorage || defaultMsg}
+                value={code || defaultMsg}
                 showPrintMargin={false}
                 height="100vh"
                 width="50vw"
@@ -56,6 +69,8 @@ export default function Editor() {
                 annotations={[annotation]}
                 editorProps={{ $blockScrolling: true }}
             />
+
+            <ThemeEditor />
         </div>
     );
 }
