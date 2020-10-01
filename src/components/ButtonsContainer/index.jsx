@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faPlayCircle,
+    faPlay,
     faForward,
     faArrowRight,
     faArrowLeft,
@@ -17,18 +17,29 @@ import emulator from 'emulator/emulator';
 
 const useStyles = makeStyles((theme) => ({
     buttonsContainer: {
-        background: theme.palette.background.default,
+        background: theme.palette.background.main,
         color: theme.palette.text.primary,
         padding: '1.2rem',
     },
-    fontAwesomeIcon: {
-        width: '3rem',
-        height: '2rem',
+    buttonWrapper: {
+        display: 'flex',
+        backgroundColor: theme.palette.background.raised,
+        borderRadius: '0.5rem',
+        width: 'auto',
+        padding: '5px 2px',
+        justifyContent: 'center',
+    },
+    button: {
+        padding: '0.4rem 0.8rem',
         outline: 'none',
         display: 'inline-block',
         textAlign: 'center',
-        background: 'none',
+        background: 'transparent',
         color: theme.palette.text.primary,
+        border: 'none',
+    },
+    playIcon: {
+        fontSize: '0.7rem',
     },
 }));
 
@@ -61,18 +72,21 @@ export default function ButtonsContainer() {
 
     return (
         <div className={classes.buttonsContainer}>
-            <button type="button" className={classes.fontAwesomeIcon}>
-                <FontAwesomeIcon icon={faArrowLeft} />
-            </button>
-            <button type="button" className={classes.fontAwesomeIcon}>
-                <FontAwesomeIcon icon={faPlayCircle} />
-            </button>
-            <button type="button" className={classes.fontAwesomeIcon} onClick={stepClick}>
-                <FontAwesomeIcon icon={faArrowRight} />
-            </button>
-            <button type="button" className={classes.fontAwesomeIcon}>
-                <FontAwesomeIcon icon={faForward} />
-            </button>
+            <div className={classes.buttonWrapper}>
+                <button type="button" className={classes.button}>
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                </button>
+                <button type="button" className={classes.button}>
+                    <FontAwesomeIcon icon={faPlay} className={classes.playIcon} />
+                </button>
+                <button type="button" className={classes.button} onClick={stepClick}>
+                    <FontAwesomeIcon icon={faArrowRight} />
+                </button>
+                <button type="button" className={classes.button}>
+                    <FontAwesomeIcon icon={faForward} />
+                </button>
+            </div>
+
         </div>
     );
 }

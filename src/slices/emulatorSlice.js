@@ -8,6 +8,7 @@ const initialState = {
     error: {
         isRaised: false,
     },
+    theme: 'dracula',
 };
 
 const emulatorSlice = createSlice({
@@ -29,13 +30,18 @@ const emulatorSlice = createSlice({
         clearError(state) {
             state.error = { isRaised: false };
         },
+        setTheme(state, action) {
+            state.theme = action.payload;
+        },
     },
 });
 
+export const selectState = (state) => state.emulator;
 export const selectCode = (state) => state.emulator.code;
 export const selectMemory = (state) => state.emulator.memory;
 export const selectRegisters = (state) => state.emulator.registers;
 export const selectError = (state) => state.emulator.error;
+export const selectTheme = (state) => state.emulator.theme;
 
 export const {
     updateCode,
@@ -43,6 +49,7 @@ export const {
     updateMemory,
     raiseError,
     clearError,
+    setTheme,
 } = emulatorSlice.actions;
 
 export default emulatorSlice.reducer;

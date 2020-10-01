@@ -1,17 +1,17 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     display: {
         width: 'inherit',
         height: '40%',
-        background: '#21222C',
+        background: theme.palette.background.raised,
         borderRadius: '0.5rem',
         padding: '0.5rem',
-        border: '1px solid #44475A',
+        border: `1px solid ${theme.palette.border.main}`,
     },
     heading: {
-        borderBottom: '1px solid #44475A',
+        borderBottom: `1px solid ${theme.palette.border.main}`,
         paddingBottom: '0.5rem',
     },
 }));

@@ -6,10 +6,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Editor from 'components/Editor';
 import Emulator from 'components/Emulator';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
         height: '100vh',
+        backgroundColor: theme.palette.background.main,
     },
 }));
 
