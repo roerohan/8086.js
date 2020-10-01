@@ -20,10 +20,10 @@ export default function Home() {
     return (
         <div className={classes.root}>
             <Grid container spacing={1}>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                     <Emulator />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                     <Editor />
                 </Grid>
             </Grid>

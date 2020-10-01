@@ -64,7 +64,7 @@ export default function Editor() {
                 value={code || defaultMsg}
                 showPrintMargin={false}
                 height="100vh"
-                width="50vw"
+                width="100%"
                 name="editor"
                 annotations={[annotation]}
                 editorProps={{ $blockScrolling: true }}
