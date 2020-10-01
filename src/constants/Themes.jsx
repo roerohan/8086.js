@@ -1,5 +1,13 @@
 import { createMuiTheme } from '@material-ui/core';
 
+// Find theme from https://github.com/ajaxorg/ace/blob/master/lib/ace/theme
+// Go to CSS for the theme
+// background.main = .ace-<theme> background-color
+// background.raised = .ace_gutter background-color
+// text.primary = .ace_<theme> color OR .ace_type color
+// text.secondary = .ace_comment colo
+// border.main = text.secondary
+
 const Themes = {
     dracula: createMuiTheme({
         palette: {
@@ -12,7 +20,7 @@ const Themes = {
                 secondary: '#6272A4',
             },
             border: {
-                main: '#44475A',
+                main: '#6272A4',
             },
         },
     }),
