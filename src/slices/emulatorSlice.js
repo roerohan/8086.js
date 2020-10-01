@@ -2,8 +2,16 @@ import { createSlice } from '@reduxjs/toolkit';
 import emulator from 'emulator/emulator';
 
 const initialState = {
-    registers: emulator.getRegisters(),
-    memory: emulator.getMemory(),
+    registers: {
+        past: [],
+        present: emulator.getRegisters(),
+        future: [],
+    },
+    memory: {
+        past: [],
+        present: emulator.getMemory(),
+        future: [],
+    },
     code: '',
     error: {
         isRaised: false,
@@ -19,10 +27,12 @@ const emulatorSlice = createSlice({
             state.code = action.payload;
         },
         updateRegisters(state, action) {
-            state.registers = action.payload;
+            state.registers.past = [...state.registers.past, state.registers.present];
+            state.registers.present = action.payload;
         },
         updateMemory(state, action) {
-            state.memory = action.payload;
+            state.memory.past = [...state.memory.past, state.memory.present];
+            state.memory.present = action.payload;
         },
         raiseError(state, action) {
             state.error = { isRaised: true, ...action.payload };
@@ -33,13 +43,34 @@ const emulatorSlice = createSlice({
         setTheme(state, action) {
             state.theme = action.payload;
         },
+        stepBack(state) {
+            if (
+                state.registers.past.length === 0
+                || state.memory.past.length === 0
+            ) {
+                console.log('Couldnt step back');
+                return;
+            }
+
+            const len = state.registers.past.length;
+
+            state.registers.future = [state.registers.present, ...state.registers.future];
+            state.registers.present = state.registers.past[len - 1];
+            emulator.cpu.registers.regs = state.registers.past[len - 1];
+            state.registers.past = state.registers.past.slice(-1);
+
+            state.memory.future = [state.memory.present, ...state.memory.future];
+            state.memory.present = state.memory.past[len - 1];
+            emulator.cpu.memory.mem = state.memory.past[len - 1];
+            state.memory.past = state.memory.past.slice(-1);
+        },
     },
 });
 
 export const selectState = (state) => state.emulator;
 export const selectCode = (state) => state.emulator.code;
-export const selectMemory = (state) => state.emulator.memory;
-export const selectRegisters = (state) => state.emulator.registers;
+export const selectMemory = (state) => state.emulator.memory.present;
+export const selectRegisters = (state) => state.emulator.registers.present;
 export const selectError = (state) => state.emulator.error;
 export const selectTheme = (state) => state.emulator.theme;
 
@@ -50,6 +81,7 @@ export const {
     raiseError,
     clearError,
     setTheme,
+    stepBack,
 } = emulatorSlice.actions;
 
 export default emulatorSlice.reducer;
