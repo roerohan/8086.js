@@ -25,6 +25,13 @@ const useStyle = makeStyles((theme) => ({
         bottom: theme.spacing(2),
         right: theme.spacing(2),
     },
+    menu: {
+        // backgroundColor: theme.palette.background.raised,
+    },
+    options: {
+        color: theme.palette.text.secondary,
+        // backgroundColor: theme.palette.background.raised,
+    },
 }));
 
 export default function ThemeEditor() {
@@ -74,12 +81,14 @@ export default function ThemeEditor() {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleToCloseMenu}
+                className={classes.menu}
             >
                 { THEMES.map((theme) => (
                     <MenuItem
                         selected={theme === currentTheme}
                         key={Math.random()}
                         onClick={handleChangeTheme(theme)}
+                        className={classes.options}
                     >
                         { theme.replace(/^\w/, (letter) => letter.toUpperCase()) }
                     </MenuItem>

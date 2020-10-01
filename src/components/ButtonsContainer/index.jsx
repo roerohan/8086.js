@@ -17,7 +17,7 @@ import emulator from 'emulator/emulator';
 
 const useStyles = makeStyles((theme) => ({
     buttonsContainer: {
-        background: theme.palette.background.default,
+        background: theme.palette.background.main,
         color: theme.palette.text.primary,
         padding: '1.2rem',
     },
