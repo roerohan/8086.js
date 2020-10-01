@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.primary,
+        backgroundColor: theme.palette.background.main,
         height: '100vh',
         display: 'flex',
         flexDirection: 'column',
