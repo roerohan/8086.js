@@ -62,6 +62,18 @@ const emulatorSlice = createSlice({
             state.memory.present = state.memory.past[len - 1];
             state.memory.past = state.memory.past.slice(-1);
         },
+        resetRegMemState(state) {
+            state.registers = {
+                past: [],
+                present: emulator.getRegisters(),
+                future: [],
+            };
+            state.memory = {
+                past: [],
+                present: emulator.getMemory(),
+                future: [],
+            };
+        },
     },
 });
 
@@ -80,6 +92,7 @@ export const {
     clearError,
     setTheme,
     stepBack,
+    resetRegMemState,
 } = emulatorSlice.actions;
 
 export default emulatorSlice.reducer;

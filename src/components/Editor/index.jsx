@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCode, selectState } from 'slices/emulatorSlice';
+import { updateCode, selectState, resetRegMemState } from 'slices/emulatorSlice';
+import emulator from 'emulator/emulator';
 
 import ButtonsContainer from 'components/ButtonsContainer';
 import NotificationError from 'components/NotificationError';
@@ -39,6 +40,8 @@ export default function Editor() {
     }
 
     const onChange = (newCode) => {
+        emulator.resetState();
+        dispatch(resetRegMemState());
         dispatch(updateCode(newCode));
     };
 
