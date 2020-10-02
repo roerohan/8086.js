@@ -102,6 +102,20 @@ export default function ButtonsContainer() {
         dispatch(stepBack());
     };
 
+    const runAllClick = () => {
+        // eslint-disable-next-line no-constant-condition
+        while (true) {
+            try {
+                loadCode();
+                emulator.cpu.step();
+                dispatch(updateRegisters(emulator.getRegisters()));
+                dispatch(updateMemory(emulator.getSerialisableMemory()));
+            } catch (err) {
+                break;
+            }
+        }
+    };
+
     return (
         <div className={classes.buttonsContainer}>
             <div className={classes.buttonWrapper}>
@@ -114,7 +128,7 @@ export default function ButtonsContainer() {
                 <button type="button" className={classes.button} onClick={stepClick}>
                     <FontAwesomeIcon icon={faArrowRight} />
                 </button>
-                <button type="button" className={classes.button}>
+                <button type="button" className={classes.button} onClick={runAllClick}>
                     <FontAwesomeIcon icon={faForward} />
                 </button>
             </div>
