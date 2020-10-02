@@ -9,7 +9,7 @@ const initialState = {
     },
     memory: {
         past: [],
-        present: emulator.getMemory(),
+        present: emulator.getSerialisableMemory(),
         future: [],
     },
     code: '',

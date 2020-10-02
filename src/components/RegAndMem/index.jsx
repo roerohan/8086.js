@@ -98,11 +98,7 @@ export default function RegAndMem() {
                                     {index}
                                 </span>
                                 <span className={classes.value}>
-                                    {
-                                        (typeof item === 'number')
-                                            ? item
-                                            : `${item.mnemonic.value} ${item.op1.value} ${item.op2.value}`
-                                    }
+                                    { item }
                                 </span>
                             </div>
                         ))}

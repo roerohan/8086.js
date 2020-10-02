@@ -63,7 +63,7 @@ export default function ButtonsContainer() {
             loadCode();
             emulator.cpu.step();
             dispatch(updateRegisters(emulator.getRegisters()));
-            dispatch(updateMemory(emulator.getMemory()));
+            dispatch(updateMemory(emulator.getSerialisableMemory()));
         } catch (err) {
             dispatch(raiseError({
                 name: err.name,
