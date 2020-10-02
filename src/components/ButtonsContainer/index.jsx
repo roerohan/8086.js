@@ -77,6 +77,7 @@ export default function ButtonsContainer() {
 
     const stepBackClick = () => {
         const len = emulatorState.registers.past.length;
+        if (len === 0) return;
 
         Object.entries(emulatorState.registers.past[len - 1])
             .map((o) => {
