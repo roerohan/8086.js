@@ -10,6 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {
     selectCode,
+    selectState,
     updateRegisters,
     raiseError,
     stepBack,
@@ -51,6 +52,7 @@ export default function ButtonsContainer() {
     const dispatch = useDispatch();
 
     const code = useSelector(selectCode);
+    const emulatorState = useSelector(selectState);
 
     const loadCode = () => {
         emulator.loadCode(code);
@@ -73,10 +75,38 @@ export default function ButtonsContainer() {
         }
     };
 
+    const stepBackClick = () => {
+        const len = emulatorState.registers.past.length;
+
+        console.log(emulator.cpu.memory.mem);
+
+        Object.entries(emulatorState.registers.past[len - 1])
+            .map((o) => {
+                const [k, v] = o;
+                if (
+                    ['H', 'L'].includes(k[1])
+                    && ['A', 'B', 'C', 'D'].includes(k[0])
+                ) {
+                    emulator.cpu.registers.regs[`${k[0]}X`].set(v, k[1]);
+                } else {
+                    emulator.cpu.registers.regs[k].set(v);
+                }
+                return o;
+            });
+
+        Object.values(emulatorState.memory.past[len - 1])
+            .map((v, i) => {
+                emulator.cpu.memory.set(i, v);
+                return v;
+            });
+
+        dispatch(stepBack());
+    };
+
     return (
         <div className={classes.buttonsContainer}>
             <div className={classes.buttonWrapper}>
-                <button type="button" className={classes.button} onClick={() => dispatch(stepBack())}>
+                <button type="button" className={classes.button} onClick={stepBackClick}>
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </button>
                 <button type="button" className={classes.button}>

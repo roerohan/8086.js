@@ -56,12 +56,10 @@ const emulatorSlice = createSlice({
 
             state.registers.future = [state.registers.present, ...state.registers.future];
             state.registers.present = state.registers.past[len - 1];
-            emulator.cpu.registers.regs = state.registers.past[len - 1];
             state.registers.past = state.registers.past.slice(-1);
 
             state.memory.future = [state.memory.present, ...state.memory.future];
             state.memory.present = state.memory.past[len - 1];
-            emulator.cpu.memory.mem = state.memory.past[len - 1];
             state.memory.past = state.memory.past.slice(-1);
         },
     },
