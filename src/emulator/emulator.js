@@ -30,6 +30,13 @@ class Emulator {
         return [...this.cpu.memory.mem];
     }
 
+    getSerialisableMemory() {
+        return [...this.cpu.memory.mem].map((v) => {
+            if (typeof v === 'number') return v;
+            return `${v.mnemonic.value} ${v.op1.value} ${v.op2.value}`;
+        });
+    }
+
     resetState() {
         this.cpu = new CPU();
     }
