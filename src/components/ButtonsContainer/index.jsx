@@ -11,10 +11,11 @@ import {
 import {
     selectCode,
     selectState,
-    updateRegisters,
-    raiseError,
     stepBack,
-    updateMemory,
+    stepForward,
+    executeStep,
+    resetRegMemState,
+    raiseError,
 } from 'slices/emulatorSlice';
 import emulator from 'emulator/emulator';
 
@@ -44,6 +45,14 @@ const useStyles = makeStyles((theme) => ({
     playIcon: {
         fontSize: '0.7rem',
     },
+    disabledIcon: {
+        color: theme.palette.text.secondary,
+    },
+    count: {
+        display: 'inline-block',
+        fontSize: '0.7rem',
+        margin: '0 0.3rem',
+    },
 }));
 
 export default function ButtonsContainer() {
@@ -58,28 +67,22 @@ export default function ButtonsContainer() {
         emulator.loadCode(code);
     };
 
-    const stepClick = () => {
-        try {
-            loadCode();
-            emulator.cpu.step();
-            dispatch(updateRegisters(emulator.getRegisters()));
-            dispatch(updateMemory(emulator.getSerialisableMemory()));
-        } catch (err) {
-            dispatch(raiseError({
-                name: err.name,
-                token: err.token,
-                message: err.message,
-                position: err.position,
-                lineNumber: err.lineNumber,
-            }));
-        }
+    const stepForwardClick = () => {
+        const len = emulatorState.registers.future.length;
+        if (len === 0) return;
+
+        dispatch(stepForward());
     };
 
     const stepBackClick = () => {
         const len = emulatorState.registers.past.length;
         if (len === 0) return;
 
-        Object.entries(emulatorState.registers.past[len - 1])
+        dispatch(stepBack());
+    };
+
+    const runFromPointClick = () => {
+        Object.entries(emulatorState.registers.present)
             .map((o) => {
                 const [k, v] = o;
                 if (
@@ -93,40 +96,68 @@ export default function ButtonsContainer() {
                 return o;
             });
 
-        Object.values(emulatorState.memory.past[len - 1])
+        Object.values(emulatorState.memory.present)
             .map((v, i) => {
                 emulator.cpu.memory.set(i, v);
                 return v;
             });
 
-        dispatch(stepBack());
+        try {
+            loadCode();
+            emulator.cpu.step();
+            dispatch(executeStep({
+                registers: emulator.getRegisters(),
+                memory: emulator.getSerialisableMemory(),
+            }));
+        } catch (err) {
+            dispatch(raiseError({
+                name: err.name,
+                token: err.token,
+                message: err.message,
+                position: err.position,
+                lineNumber: err.lineNumber,
+            }));
+        }
     };
 
     const runAllClick = () => {
+        emulator.resetState();
+        dispatch(resetRegMemState());
+
         // eslint-disable-next-line no-constant-condition
         while (true) {
             try {
                 loadCode();
                 emulator.cpu.step();
-                dispatch(updateRegisters(emulator.getRegisters()));
-                dispatch(updateMemory(emulator.getSerialisableMemory()));
+                dispatch(executeStep({
+                    registers: emulator.getRegisters(),
+                    memory: emulator.getSerialisableMemory(),
+                }));
             } catch (err) {
                 break;
             }
         }
     };
 
+    const pastLength = emulatorState.registers.past.length;
+    const backClass = pastLength > 0 ? '' : classes.disabledIcon;
+
+    const futureLength = emulatorState.registers.future.length;
+    const forwardClass = futureLength > 0 ? '' : classes.disabledIcon;
+
     return (
         <div className={classes.buttonsContainer}>
             <div className={classes.buttonWrapper}>
                 <button type="button" className={classes.button} onClick={stepBackClick}>
-                    <FontAwesomeIcon icon={faArrowLeft} />
+                    <sup className={classes.count}>{pastLength}</sup>
+                    <FontAwesomeIcon icon={faArrowLeft} className={backClass} />
                 </button>
-                <button type="button" className={classes.button}>
+                <button type="button" className={classes.button} onClick={runFromPointClick}>
                     <FontAwesomeIcon icon={faPlay} className={classes.playIcon} />
                 </button>
-                <button type="button" className={classes.button} onClick={stepClick}>
-                    <FontAwesomeIcon icon={faArrowRight} />
+                <button type="button" className={classes.button} onClick={stepForwardClick}>
+                    <FontAwesomeIcon icon={faArrowRight} className={forwardClass} />
+                    <sup className={classes.count}>{futureLength}</sup>
                 </button>
                 <button type="button" className={classes.button} onClick={runAllClick}>
                     <FontAwesomeIcon icon={faForward} />

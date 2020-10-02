@@ -27,11 +27,11 @@ const emulatorSlice = createSlice({
             state.code = action.payload;
         },
         updateRegisters(state, action) {
-            state.registers.past = [...state.registers.past, state.registers.present];
+            // state.registers.past = [...state.registers.past, state.registers.present];
             state.registers.present = action.payload;
         },
         updateMemory(state, action) {
-            state.memory.past = [...state.memory.past, state.memory.present];
+            // state.memory.past = [...state.memory.past, state.memory.present];
             state.memory.present = action.payload;
         },
         raiseError(state, action) {
@@ -42,6 +42,17 @@ const emulatorSlice = createSlice({
         },
         setTheme(state, action) {
             state.theme = action.payload;
+        },
+        executeStep(state, action) {
+            const { registers, memory } = action.payload;
+
+            state.registers.past = [...state.registers.past, state.registers.present];
+            state.registers.present = registers;
+            state.registers.future = [];
+
+            state.memory.past = [...state.memory.past, state.memory.present];
+            state.memory.present = memory;
+            state.memory.future = [];
         },
         stepBack(state) {
             if (
@@ -56,21 +67,28 @@ const emulatorSlice = createSlice({
 
             state.registers.future = [state.registers.present, ...state.registers.future];
             state.registers.present = state.registers.past[len - 1];
-
-            if (state.registers.past.length === 1) {
-                state.registers.past = [];
-            } else {
-                state.registers.past = state.registers.past.slice(0, -1);
-            }
+            state.registers.past = state.registers.past.slice(0, -1);
 
             state.memory.future = [state.memory.present, ...state.memory.future];
             state.memory.present = state.memory.past[len - 1];
-
-            if (state.memory.past.length === 1) {
-                state.memory.past = [];
-            } else {
-                state.memory.past = state.memory.past.slice(0, -1);
+            state.memory.past = state.memory.past.slice(0, -1);
+        },
+        stepForward(state) {
+            if (
+                state.registers.future.length === 0
+                || state.memory.future.length === 0
+            ) {
+                console.log('Couldnt step forward');
+                return;
             }
+
+            state.registers.past = [...state.registers.past, state.registers.present];
+            [state.registers.present] = state.registers.future;
+            state.registers.future = state.registers.future.slice(1);
+
+            state.memory.past = [...state.memory.past, state.memory.present];
+            [state.memory.present] = state.memory.future;
+            state.memory.future = state.memory.future.slice(1);
         },
         resetRegMemState(state) {
             state.registers = {
@@ -101,7 +119,9 @@ export const {
     raiseError,
     clearError,
     setTheme,
+    executeStep,
     stepBack,
+    stepForward,
     resetRegMemState,
 } = emulatorSlice.actions;
 
