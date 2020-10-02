@@ -118,6 +118,10 @@ export default class CPU {
             }
             break;
 
+        case 'XOR':
+            setAddr(op1, getAddr(op1) ^ getAddr(op2));
+            break;
+
         case 'AND':
             setAddr(op1, getAddr(op1) & getAddr(op2));
             break;
