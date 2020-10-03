@@ -52,10 +52,12 @@ export default function Register(props) {
         if (registerValue <= maxRegisterValue
             // we have to trim zeros so that we can compare 0 with '0000'
             && registerValue.toString(base) === (target.value.replace(/^0+/, '') || '0')) {
-            console.log(target.value, registerValue);
-            emulator.cpu.registers.regs[name].set(registerValue);
+            // Set value in local state
             setRegValue(target.value);
-            dispatch(updateRegisters(registers));
+            // Update value in emulator
+            emulator.cpu.registers.regs[name].set(target.value);
+            // Disatch action to update store
+            dispatch(updateRegisters(emulator.getRegisters()));
         }
     };
 
