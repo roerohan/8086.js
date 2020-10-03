@@ -98,7 +98,7 @@ export default function RegAndMem() {
                                     {index}
                                 </span>
                                 <span className={classes.value}>
-                                    {item}
+                                    { item }
                                 </span>
                             </div>
                         ))}
