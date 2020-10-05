@@ -93,6 +93,10 @@ export default class CPU {
             setAddr(op1, getAddr(op1) + 1);
             break;
 
+        case 'DEC':
+            setAddr(op1, getAddr(op1) - 1);
+            break;
+
         case 'DIV':
             if (op1.size === 8) {
                 const al = regs.AX.get('l') / getAddr(op1);
