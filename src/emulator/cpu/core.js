@@ -117,6 +117,29 @@ export default class CPU {
                 // Store higher bits in DX
             }
             break;
+        case 'SHL': {
+            const n = getAddr(op1);
+            const count = getAddr(op2);
+            const ans = (n << count);
+            const cf = ((n << (count - 1)) & 0x8000) >> 15;
+            const zf = (ans ^ n) >> 15;
+            if (cf) {
+                regs.flags.setFlag(flags.carry);
+            } else {
+                regs.flags.unsetFlag(flags.carry);
+            }
+            if (zf) {
+                regs.flags.setFlag(flags.zero);
+            } else {
+                regs.flags.unsetFlag(flags.zero);
+            }
+            setAddr(op1, ans);
+        }
+            break;
+
+        case 'XOR':
+            setAddr(op1, getAddr(op1) ^ getAddr(op2));
+            break;
 
         case 'AND':
             setAddr(op1, getAddr(op1) & getAddr(op2));
