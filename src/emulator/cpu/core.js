@@ -140,7 +140,7 @@ export default class CPU {
             setAddr(op1, ans);
         }
             break;
-        
+
         case 'SHR': {
             const n = getAddr(op1);
             const count = getAddr(op2);
