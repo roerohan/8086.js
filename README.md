@@ -6,9 +6,9 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <!-- <a href="https://github.com/roerohan/8086.js">
-    <img src="https://project-logo.png" alt="Logo" width="80">
-  </a> -->
+  <a href="https://github.com/roerohan/8086.js">
+    <img src="https://roerohan.github.io/8086.js/8086.svg" alt="Logo" width="240">
+  </a> 
 
   <h3 align="center">8086.js</h3>
 
