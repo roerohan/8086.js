@@ -141,6 +141,26 @@ export default class CPU {
         }
             break;
 
+        case 'SHR': {
+            const n = getAddr(op1);
+            const count = getAddr(op2);
+            const ans = (n >> count);
+            const cf = ((n >> (count - 1)) & 0x01);
+            const zf = (ans ^ n) >> 15;
+            if (cf) {
+                regs.flags.setFlag(flags.carry);
+            } else {
+                regs.flags.unsetFlag(flags.carry);
+            }
+            if (zf) {
+                regs.flags.setFlag(flags.zero);
+            } else {
+                regs.flags.unsetFlag(flags.zero);
+            }
+            setAddr(op1, ans);
+        }
+            break;
+
         case 'XOR':
             setAddr(op1, getAddr(op1) ^ getAddr(op2));
             break;
