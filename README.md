@@ -10,7 +10,7 @@
     <img src="https://roerohan.github.io/8086.js/8086.svg" alt="Logo" width="240">
   </a> 
 
-  <h3 align="center">8086.js</h3>
+  <!-- <h3 align="center">8086.js</h3> -->
 
   <p align="center">
     A basic web-based 8086 emulator built with Javascript.
