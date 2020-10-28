@@ -1,6 +1,6 @@
 [![Issues][issues-shield]][issues-url]
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <!-- PROJECT LOGO -->
@@ -10,7 +10,7 @@
     <img src="https://roerohan.github.io/8086.js/8086.svg" alt="Logo" width="240">
   </a> 
 
-  <h3 align="center">8086.js</h3>
+  <!-- <h3 align="center">8086.js</h3> -->
 
   <p align="center">
     A basic web-based 8086 emulator built with Javascript.
@@ -189,6 +189,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/capellini"><img src="https://avatars3.githubusercontent.com/u/75311?v=4" width="100px;" alt=""/><br /><sub><b>Rob Capellini</b></sub></a><br /><a href="https://github.com/roerohan/8086.js/commits?author=capellini" title="Code">💻</a></td>
     <td align="center"><a href="https://josesp.netlify.com/"><img src="https://avatars3.githubusercontent.com/u/23442814?v=4" width="100px;" alt=""/><br /><sub><b>Jose M. Segura Polanco</b></sub></a><br /><a href="https://github.com/roerohan/8086.js/commits?author=DarkCode01" title="Code">💻</a></td>
     <td align="center"><a href="https://devenv.now.sh/"><img src="https://avatars1.githubusercontent.com/u/49075129?v=4" width="100px;" alt=""/><br /><sub><b>Pranav P</b></sub></a><br /><a href="https://github.com/roerohan/8086.js/commits?author=pranavp10" title="Code">💻</a></td>
+    <td align="center"><a href="https://ffcs.ooo"><img src="https://avatars0.githubusercontent.com/u/14910957?v=4" width="100px;" alt=""/><br /><sub><b>Namit Nathwani</b></sub></a><br /><a href="https://github.com/roerohan/8086.js/commits?author=namsnath" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/Sanjana-R"><img src="https://avatars0.githubusercontent.com/u/48384242?v=4" width="100px;" alt=""/><br /><sub><b>Sanjana Rai</b></sub></a><br /><a href="https://github.com/roerohan/8086.js/commits?author=Sanjana-R" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/vikitor566"><img src="https://avatars3.githubusercontent.com/u/5832796?v=4" width="100px;" alt=""/><br /><sub><b>vikitor566</b></sub></a><br /><a href="https://github.com/roerohan/8086.js/commits?author=vikitor566" title="Code">💻</a></td>
   </tr>
 </table>
 
